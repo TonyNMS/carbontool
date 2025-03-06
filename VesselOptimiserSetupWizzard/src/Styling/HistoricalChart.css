@@ -1,0 +1,9 @@
+.historical-chart-container {
+    width: 100%;
+    height: 90vh; /* or another fixed height */
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
