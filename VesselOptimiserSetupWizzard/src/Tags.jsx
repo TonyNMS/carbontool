@@ -3,11 +3,13 @@ import SpdPwrChart from "./Tabs/SpdPwrChart";
 import HistroicalChart from "./Tabs/HistoricalChart"
 import DutyCycleChart from "./Tabs/DutyCycleChart"
 import Summary from "./Tabs/Summary";
+import Welcome from "./Tabs/Welcome";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import 'react-tabs/style/react-tabs.css';
 import "./Styling/Tags.css";
 
 import {SetRenderedTags } from "./App";
+import TestZoom from "./assets/TestZoom";
 
 const ALL_TABS = {
     "Welcome":"Welcome Page",
@@ -17,7 +19,7 @@ const ALL_TABS = {
     "Summary" : "General Summary"
 }
 const ALL_PANELS ={
-    "Welcome":"Welcome Page",
+    "Welcome":<Welcome></Welcome>,
     "SpdPwr":<SpdPwrChart></SpdPwrChart>,
     "History":<HistroicalChart></HistroicalChart>,
     "DutyCycle":<DutyCycleChart></DutyCycleChart>,

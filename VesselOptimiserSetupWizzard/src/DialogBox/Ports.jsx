@@ -24,7 +24,7 @@ function Ports (props){
         startPort === "" ? null : setHasPorts(true)
     }
     const handleNextStep =()=>{
-        finslResultContext.setFinalResquest(prev=>({...prev,  provided_evidence : "ports", ports:true, ports_data :[startPort, endPort]}));
+        finslResultContext.setFinalResquest(prev=>({...prev, ports:true, ports_data :[startPort, endPort]}));
         return(
             hasPorts? props.next() : alert("need to input port")
         )

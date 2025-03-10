@@ -79,7 +79,7 @@ function SpdPwrCurve (props){
             </div>
             <div className="button-section-spd">
                 <button className='button-a' onClick={props.prev}>Restart Setup</button>
-                <button className='button-b' onClick={haveSpdCurve? props.next : props.branch}>Next Step</button>
+                <button className='button-b' onClick={props.next}>Next Step</button>
             </div>
             <div>
                 <button className = 'button-final' onClick></button>

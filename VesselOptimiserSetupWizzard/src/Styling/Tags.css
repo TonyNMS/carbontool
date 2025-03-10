@@ -1,7 +1,7 @@
 .tags-section{
     flex: 1;           
     height: 100vh;     
-    background-color: #fff; 
+  
     overflow-y: auto;  
   
     border-style: solid;
@@ -9,7 +9,7 @@
     border-left: transparent;
     border-radius: 5px;
     border-width: 2px;
-    background-color: #F7F7F7;
+    background-color: #adadad;
   }
   .react-tabs {
     font-family: 'Arial', sans-serif;

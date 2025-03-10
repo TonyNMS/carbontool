@@ -31,7 +31,7 @@ function DutyCycle (props) {
                         return null; 
                     })
                     console.log(formattedData);
-                    FINAL_REQUEST.setFinalResquest(prev=>({...prev, provided_evidence : "duty_cycle", duty_cycle:true, duty_cycle_data :formattedData}));
+                    FINAL_REQUEST.setFinalResquest(prev=>({...prev, duty_cycle:true, duty_cycle_data :formattedData}));
                     
                 }
                 reader.readAsText(csvFile);
@@ -54,7 +54,7 @@ function DutyCycle (props) {
     const handleCheckboxChange = (event) => {
         if (event.target.checked) {
             setHaveDutyCycle(false);
-            FINAL_REQUEST.setFinalResquest(prev=>({...prev,provided_evidence : "", duty_cycle:false, duty_cycle_data :[]}));
+            FINAL_REQUEST.setFinalResquest(prev=>({...prev, duty_cycle:false, duty_cycle_data :[]}));
             setCSVName("");
         }
     };

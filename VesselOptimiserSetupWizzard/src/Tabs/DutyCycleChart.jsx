@@ -38,7 +38,7 @@ const DutyCycleChart =()=>{
             x: {
                 type: 'linear',
                 title: { 
-                    display: true, text: 'X-Axis' },
+                    display: true, text: 'time (s)' },
                 ticks:{
                     callback: function(value) {
                         return Math.round(value);

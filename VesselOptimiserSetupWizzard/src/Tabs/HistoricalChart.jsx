@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import {ResultContext } from "../App";
 import { MapContainer, TileLayer, Polyline, Tooltip, Marker, useMap } from 'react-leaflet';
+import L from "leaflet"
 import 'leaflet/dist/leaflet.css';
 import '../Styling/HistoricalChart.css'
 const TEMP_COORDS = [
@@ -35,30 +36,69 @@ function InvalidateMapSize() {
     }, [map]);
     return null;
 }
+function centerLeafletMapOnMarker(map, marker) {
+  var latLngs = [ marker.getLatLng() ];
+  var markerBounds = L.latLngBounds(latLngs);
+  map.fitBounds(markerBounds);
+}
+function Fitbounds({positions}){
+  const map = useMap()
+  useEffect(
+    ()=>{
+      if (positions && positions>0){
+        const latLngs = positions.map((lat,lng)=>L.latLng(lat, lng))
+        const bounds = L.latLngBounds(lat)
+        map.fitBounds(bounds, {padding:[20,20]})
+      }
+    }, [map, positions]
+  )
+  return null
+}
+
 
 const HistoricalChart = () => {
   const Uploaded_Evidence = useContext(ResultContext);
-  const coordsList = Uploaded_Evidence.historical_route_data;
-  const center = coordsList.length > 0 ? coordsList[0] : [54.99185, -1.45007];
-
-  return (
-    <div className="historical-chart-container">
-        {console.log(JSON.stringify(Uploaded_Evidence))}
-      <MapContainer center={center} zoom={16} style={{ width: '100%', height: '100%' }} zoomControl={false}>
-    
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles courtesy of <a href="http://www.openstreetmap.bzh/" target="_blank">Breton OpenStreetMap Team</a>'
-          url='https://tile.openstreetmap.bzh/br/{z}/{x}/{y}.png'
-        />
-        <InvalidateMapSize />
-
-        <Polyline positions={coordsList} color="blue" dashArray="2.5, 5">
-            <Tooltip>Shipping Lane</Tooltip>
-        </Polyline>
-    
-      </MapContainer>
-    </div>
-  );
+    let coordsList
+    let center
+    if(Uploaded_Evidence.generated_route_data ){
+      coordsList = Uploaded_Evidence.generated_route_data[0];
+      console.log(coordsList)
+    }else{
+      coordsList=[]
+    }
+    if (coordsList == null){
+      center =[55.0078440586911, -1.393887435769202]
+      coordsList=TEMP_COORDS
+    }else {
+      center = coordsList[0]
+    }
+    const mapRef = useRef(null);
+  
+    useEffect(() => {
+      if (!mapRef.current) {
+        mapRef.current = L.map("map").setView(center, 5);
+  
+       
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution: "&copy; OpenStreetMap contributors",
+        }).addTo(mapRef.current);
+  
+        
+        const polyline = L.polyline(coordsList, {
+          color: "blue",
+          weight: 4,
+          opacity: 0.7,
+          dashArray: "10, 5",
+        }).addTo(mapRef.current);
+  
+        mapRef.current.fitBounds(polyline.getBounds());
+      }
+    }, []);
+    return(
+      <div className="historical-chart-container ">
+          <div id="map" style={{ height: "1200px", width: "100%" }}></div>
+      </div>
+    );
 };
 
 export default HistoricalChart;

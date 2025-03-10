@@ -25,7 +25,7 @@ function GenerateSpdPwr (props){
     const checkALlInputDone =()=>{
         return Object.values(spdPwrRequest).every(value => Number(value) !== 0);
     }
-    /**------Speed Power Curve Call Back Handler */
+   
     const handleSpdPwrCurveSubmission =()=>{
         if (Object.values(spdPwrRequest).every(value => Number(value) !== 0)){
             FINAL_REQUEST.setFinalResquest(prev=>({...prev, spd_power : FAKE_DATA_PWRSPD}));

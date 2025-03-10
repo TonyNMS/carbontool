@@ -20,7 +20,14 @@
   border-color:black;
   border-radius: 2px;
   border-width:2px;
-  background-color: #f7f7f7
+  background: linear-gradient(
+    to left bottom,  
+    #13a4a2, 
+    #1982bd, 
+    #0cb393, 
+    #1194b0  
+  );
+  transition: background 0.5s ease-in-out;
 }
 .setup-column caption{
   font-size:1.5em;
@@ -45,7 +52,9 @@
 .title-section h3{
   font-size:1.4em;
   font-style: italic;
-  background-color: #e7f3fe;
+  background-color: transparent;
+  font-size: x-large;
+  color : white;
   padding:15px;
   border-left: 5px solid #007Bff;
   margin-bottom: 20px;
@@ -53,20 +62,32 @@
 
 .button-section button{
   width: 50%;
-  padding: 10px 15px;
-  border:2px solid #ccc;
-  border-radius: 6px;
-  background: linear-gradient(180deg, #ffffff 0%, #797575 100%);
-  color: #333;
-  font-size: 14px;
+  display: inline-block;
+  outline: 0;
   text-align: center;
   cursor: pointer;
-  transition: background 0.2s ease, box-shadow 0.2s ease;
+  padding: 17px 30px;
+  margin-bottom: 10px;
+  border: 0;
+  color: #fff;
+  font-size: 17.5px;
+  background: #00d301;
+  background: -webkit-linear-gradient(-196deg,#3986ce,#128ebe 50%,#127ebd);
+  background: -webkit-linear-gradient(164deg,#1c9dbd,#1369af 50%,#04a8ad);
+  background: linear-gradient(286deg,#00d301,#36c275 50%,#00a562);
+  line-height: 30px;
+  font-weight: 800;
+  transition: background,color .1s ease-in-out;
 }
 .button-section button:hover{
   background: linear-gradient(270deg, #c4bfbf 0%, #dcdcdc 100%);
-  border: 2px solid #ffffff;
+ 
 }
+.button-section button:active{
+  transform: scale(0.98);          
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
 .final-button{
   bottom: 0;
   position: absolute;

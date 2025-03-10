@@ -3,6 +3,18 @@ import {useDropzone} from "react-dropzone"
 import { SetFinalAnalysisRequest } from "../App";
 import "../Styling/HistoricalPath.css"
 
+
+const TEMP_COORDS =[
+    [55.00722078637494, -1.39656597301898],
+    [54.98870919566775, -0.8342033040132141],
+    [54.99304246142249, -0.23956830032707904],
+    [55.01470177282599, 0.44295733185763064],
+    [55.0813536208248, 2.6776921711760022],
+    [55.17089736938877, 4.902274323015869],
+    [54.96887060469377, 6.915530643060103],
+    [54.54752560112028, 8.321225032105556],
+    [54.365620674797285, 8.648733069349673],
+]
 function HistoricalPath (props){
     const [hashistroyPath, setHasHistroyPath] = useState(false);
     const [csvName, setCSVName] = useState("");
@@ -24,7 +36,7 @@ function HistoricalPath (props){
                         return null; 
                     })
                    
-                    FINAL_REQUEST.setFinalResquest(prev=>({...prev,  provided_evidence : "historical_route", historical_route:true, historical_route_data :formattedData}));
+                    FINAL_REQUEST.setFinalResquest(prev=>({...prev,  historical_route:true, historical_route_data :TEMP_COORDS}));
                 }
                 reader.readAsText(csvFile);
                 setCSVName(csvFile.name);
@@ -46,7 +58,7 @@ function HistoricalPath (props){
     const handleCheckboxChange = (event) => {
         if (event.target.checked) {
             setHasHistroyPath(false);
-            FINAL_REQUEST.setFinalResquest(prev=>({...prev,  provided_evidence : "", historical_route:false, historical_route_data :[]}));
+            FINAL_REQUEST.setFinalResquest(prev=>({...prev,  historical_route:false, historical_route_data :[]}));
             setCSVName("");
         }
     };

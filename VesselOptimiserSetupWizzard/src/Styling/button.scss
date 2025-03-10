@@ -1,0 +1,33 @@
+
+buttopn{
+    display: inline-block;
+    outline: 0;
+    text-align: center;
+    cursor: pointer;
+    padding: 17px 30px;
+    border: 0;
+    color: #fff;
+    font-size: 17.5px;
+    background: #00d301;
+    background: -webkit-linear-gradient(-196deg,#3986ce,#128ebe 50%,#127ebd);
+    background: -webkit-linear-gradient(164deg,#1c9dbd,#1369af 50%,#04a8ad);
+    background: linear-gradient(286deg,#00d301,#36c275 50%,#00a562);
+    line-height: 30px;
+    font-weight: 800;
+    transition: background,color .1s ease-in-out;
+
+}
+button_2{
+    width: 50%;
+    padding: 10px 15px;
+    border:2px solid #ccc;
+    border-radius: 6px;
+    background: linear-gradient(180deg, #ffffff 0%, #797575 100%);
+    color: #333;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+

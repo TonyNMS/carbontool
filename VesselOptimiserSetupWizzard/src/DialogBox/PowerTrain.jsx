@@ -4,14 +4,12 @@ import { SetFinalAnalysisRequest } from "../App";
 
 function PowerTrain(props){
     const [pwrSpecs, setPwrSpecs] = useState({
-        vessel_length : 110,
-        vessel_width : 20,
-        block_coeffcient : 10000,
-        draught : 110,
+        vessel_length : 29.622,
+        vessel_width : 8.5,
+        block_coeffcient : 0.48,
+        draught : 3.7,
     });
-    const [hasAllSpecs, setHasAllSpecs] = useState({
-
-    });
+ 
     const serFinalRes = useContext(SetFinalAnalysisRequest);
     const handleVesselParameterInput =(e)=>{
         switch (e.target.name){
@@ -27,12 +25,12 @@ function PowerTrain(props){
                 break
             case "power":
                 setPwrSpecs((prev)=>({
-                    ...prev , generator_rated_power : Number(e.target.value)
+                    ...prev , block_coeffcient : Number(e.target.value)
                 }))
                 break
             case "volume":
                 setPwrSpecs((prev)=>({
-                    ...prev , fuel_volume : Number(e.target.value)
+                    ...prev , draught : Number(e.target.value)
                 }))
                 break
         }
@@ -47,9 +45,9 @@ function PowerTrain(props){
             serFinalRes.setFinalResquest((prev)=>(
                 {
                     ...prev,
-                    design_particulars:{
-                        "length": pwrSpecs.vessel_width,
-                        "breadth": pwrSpecs.vessel_length,
+                    design_particulars: {
+                        "length": pwrSpecs.vessel_length,
+                        "breadth": pwrSpecs. vessel_width,
                         "draught":  pwrSpecs.draught,
                         "block_coefficient": pwrSpecs.block_coeffcient,
                       },
@@ -72,10 +70,10 @@ function PowerTrain(props){
                         <tr><th>Component</th><th></th><th>Value</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td>Vessel Length</td><td>------</td><td><input type="number" placeholder="Input Vessel Length Here" name="length" onChange={(e)=>handleVesselParameterInput(e)}></input></td></tr>
-                        <tr><td>Vessel Width</td><td>------</td><td><input type="number" placeholder="Input Vessel Width Here" name="width" onChange={(e)=>handleVesselParameterInput(e)}></input></td></tr>
-                        <tr><td>Block Coeffcient</td><td>------</td><td><input type="number" placeholder="Input Vessel Block Coeffcient Here" name="power" onChange={(e)=>handleVesselParameterInput(e)}></input></td></tr>
-                        <tr><td>Draught</td><td>------</td><td><input type="number" placeholder="Input Vessel Draught Here" name="volume" onChange={(e)=>handleVesselParameterInput(e)}></input></td></tr>
+                        <tr><td>Vessel Length</td><td>------</td><td><input type="number" placeholder={`Default to ${pwrSpecs.vessel_length} m`} name="length" onChange={(e)=>handleVesselParameterInput(e)}></input></td></tr>
+                        <tr><td>Vessel Breadth</td><td>------</td><td><input type="number" placeholder={`Default to ${pwrSpecs.vessel_width} m`}  name="width" onChange={(e)=>handleVesselParameterInput(e)}></input></td></tr>
+                        <tr><td>Draught</td><td>------</td><td><input type="number" placeholder={`Default to ${pwrSpecs.draught} m`}  name="volume" onChange={(e)=>handleVesselParameterInput(e)}></input></td></tr>
+                        <tr><td>Block Coeffcient</td><td>------</td><td><input type="number" placeholder={`Default to ${pwrSpecs.block_coeffcient}`}  name="power" onChange={(e)=>handleVesselParameterInput(e)}></input></td></tr>
                     </tbody>
                 </table>
             </div>
