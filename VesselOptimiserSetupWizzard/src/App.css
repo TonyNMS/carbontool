@@ -72,15 +72,13 @@
   color: #fff;
   font-size: 17.5px;
   background: #00d301;
-  background: -webkit-linear-gradient(-196deg,#3986ce,#128ebe 50%,#127ebd);
-  background: -webkit-linear-gradient(164deg,#1c9dbd,#1369af 50%,#04a8ad);
-  background: linear-gradient(286deg,#00d301,#36c275 50%,#00a562);
+  background: linear-gradient(to right, #005f73, #1a279e);
   line-height: 30px;
   font-weight: 800;
-  transition: background,color .1s ease-in-out;
+  transition: background,color .3s ease-in-out;
 }
 .button-section button:hover{
-  background: linear-gradient(270deg, #c4bfbf 0%, #dcdcdc 100%);
+  background: linear-gradient(to right, #0a9396, #94d2bd);
  
 }
 .button-section button:active{
@@ -95,15 +93,21 @@
   width: 100%;
 }
 .final-button button{
-  width: 100%;
-  padding: 10px 15px;
-  border-radius: 6px;
-  background: linear-gradient(180deg, #ffffff 0%, #797575 100%);
-  color: #333;
-  font-size: 14px;
+  width: 50%;
+  display: inline-block;
+  outline: 0;
   text-align: center;
   cursor: pointer;
-  transition: background 0.2s ease, box-shadow 0.2s ease;
+  padding: 17px 30px;
+  margin-bottom: 10px;
+  border: 0;
+  color: #fff;
+  font-size: 17.5px;
+  background: #00d301;
+  background: linear-gradient(to right, #005f73, #1a279e);
+  line-height: 30px;
+  font-weight: 800;
+  transition: background,color .3s ease-in-out;
 }
 
 .final-button button:hover{

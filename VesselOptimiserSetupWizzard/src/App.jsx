@@ -11,40 +11,30 @@ import GenerateSpdPwr from './Make/GenerateSpdPwr';
 import Tags from './Tags';
 import { ClipLoader } from 'react-spinners';
 import "../src/Styling/button.scss"
-const TEMP_COORDS =[
-  [55.00722078637494, -1.39656597301898],
-  [54.98870919566775, -0.8342033040132141],
-  [54.99304246142249, -0.23956830032707904],
-  [55.01470177282599, 0.44295733185763064],
-  [55.0813536208248, 2.6776921711760022],
-  [55.17089736938877, 4.902274323015869],
-  [54.96887060469377, 6.915530643060103],
-  [54.54752560112028, 8.321225032105556],
-  [54.365620674797285, 8.648733069349673],
-]
 
-const MODEL_STYLE ={
+const MODEL_STYLE = {
   content: {
-    maxWidth: "1000px", 
-    maxHeight:"55%",
+    maxWidth: "1000px",
+    maxHeight: "55%",
     height: "auto",
     margin: "auto",
     borderRadius: "8px",
     padding: "15px",
     backgroundColor: "white",
-    color: "black", 
+    color: "black",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center", 
+    alignItems: "center",
     justifyContent: "flex-start",
     textAlign: "center",
     boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.08)",
-    position:'absolute'
+    position: 'absolute',
+    zIndex: '1000'
   },
   overlay: {
-    backgroundColor: "rgba(122, 117, 117, 0.5)", 
+    backgroundColor: "rgba(122, 117, 117, 0.5)",
     display: "flex",
-    alignItems: "center", 
+    alignItems: "center",
     justifyContent: "center",
   },
 }
@@ -57,74 +47,74 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [returnedRes, setReturnedRes] = useState(
     {
-      duty_cycle_data :[],
-      generated_route_data :[],
-      speed_power_curve:[],
-      fuel_consumption:0,
-      co2_emission:0
+      duty_cycle_data: [],
+      generated_route_data: [],
+      speed_power_curve: [],
+      fuel_consumption: 0,
+      co2_emission: 0
     }
 
   );
 
   const [modelIsOpen, setModelIsOpen] = useState(false);
-  const [renderedTags, setRenderedTags] = useState(['Welcome', 'Summary']);
+  const [renderedTags, setRenderedTags] = useState(['Welcome', 'Summary', "SpdPwr", "History", "DutyCycle"]);
 
-  const toggleSpdPwr = () =>{
+  const toggleSpdPwr = () => {
     defineRenderedTag("SpdPwr")
   }
-  const toggleDutyCycle = () =>{
+  const toggleDutyCycle = () => {
     defineRenderedTag("DutyCycle")
   }
-  const toggleHistroy = () =>{
+  const toggleHistroy = () => {
     defineRenderedTag("History")
   }
-  const defineRenderedTag =(input)=>{
-    if(renderedTags.includes(input)){
-      const newList = renderedTags.filter(item=>item !==input)
+  const defineRenderedTag = (input) => {
+    if (renderedTags.includes(input)) {
+      const newList = renderedTags.filter(item => item !== input)
       console.log(newList);
-      setRenderedTags(renderedTags.filter(item=>item !==input))
-    }else{
+      setRenderedTags(renderedTags.filter(item => item !== input))
+    } else {
       const newList = [...renderedTags, input]
       console.log(newList);
       setRenderedTags([...renderedTags, input])
     }
-    
+
   };
   const [finalResquest, setFinalResquest] = useState(
     {
-      spd_power : [],
-      design_particulars:{
+      spd_power: [],
+      design_particulars: {
         "length": 29.622,
         "breadth": 8.50,
         "draught": 3.70,
         "block_coefficient": 0.482
       },
-      duty_cycle:false,
-      historical_route:false,
-      ports:false,
-      duty_cycle_data :[],
-      historical_route_data :[],
-      ports_data:[],
+      duty_cycle: false,
+      historical_route: false,
+      ports: false,
+      duty_cycle_data: [],
+      historical_route_data: [],
+      ports_data: [],
     }
   )
   const [devResquest, setDevResquest] = useState(
     {
-      spd_power : [],
-      design_particulars:{
+      spd_power: [],
+      design_particulars: {
         "length": 29.622,
         "breadth": 8.50,
         "draught": 3.70,
         "block_coefficient": 0.482
       },
-      duty_cycle:false,
-      historical_route:false,
-      ports:true,
-      duty_cycle_data :[],
-      historical_route_data :[],
-      ports_data:["TYN", "CUX"],
+      duty_cycle: false,
+      historical_route: false,
+      ports: true,
+      duty_cycle_data: [],
+      historical_route_data: [],
+      ports_data: ["TYN", "CUX"],
     }
   )
-  const changedComponentsStats = (input)=>{
+  const changedComponentsStats = (input) => {
     return {
       SpdPwr: input === 'SpdPwr',
       SpdPwrGen: input === 'SpdPwrGen',
@@ -134,32 +124,32 @@ function App() {
       Ports: input === 'Ports'
     }
   }
-  const  [componentStats, setComponentStats] = useState({
-    'SpdPwr' : false,
-    'SpdPwrGen' :false,
-    'DutyCycle' : false,
-    'PowerTrainConfig' : false,
+  const [componentStats, setComponentStats] = useState({
+    'SpdPwr': false,
+    'SpdPwrGen': false,
+    'DutyCycle': false,
+    'PowerTrainConfig': false,
     'HistoryPath': false,
-    'Ports':false
+    'Ports': false
   })
   const display_spdpwr = () => {
     setComponentStats((prevState) => (changedComponentsStats('SpdPwr')));
     setModelIsOpen(true);
   };
-  const display_spdpwrgen =() =>{
+  const display_spdpwrgen = () => {
     setComponentStats((prevState) => (changedComponentsStats('SpdPwrGen')));
   }
 
-  const display_dutycycle = () =>{
+  const display_dutycycle = () => {
     setComponentStats((prevState) => (changedComponentsStats('DutyCycle')));
   }
-  const display_historical = () =>{
+  const display_historical = () => {
     setComponentStats((prevState) => (changedComponentsStats('HistoryPath')));
   }
-  const display_ports = () =>{
+  const display_ports = () => {
     setComponentStats((prevState) => (changedComponentsStats('Ports')));
   }
-  const display_powertrain = ()=>{
+  const display_powertrain = () => {
     setComponentStats((prevState) => (changedComponentsStats('PowerTrainConfig')));
   }
   const finish_setup = () => {
@@ -173,70 +163,70 @@ function App() {
   };
   const handleSubmissiton = () => {
     setLoading(true);
-  
+
     console.log(finalResquest.duty_cycle_data)
 
     axios
-    .post('http://127.0.0.1:8000/api/calculate/', finalResquest)
-    .then(response=>{
-    
-      console.log(`fuel consumtion: ${response.data.fuel_consumption}`)
-      console.log(`all res : ${JSON.stringify(response.data)}`)
-      if(response.data.estimated_route){
-        setReturnedRes(prev=>({...prev, generated_route_data : response.data.estimated_route}))
-      }
-      
-      setReturnedRes(prev=>({...prev, duty_cycle_data : response.data.duty_cycle }))
-      setReturnedRes(prev=>({...prev, speed_power_curve : response.data.speed_power_curve}))
-      setReturnedRes(prev=>({...prev, fuel_consumption : response.data.fuel_consumption}))
-      setReturnedRes(prev=>({...prev, co2_emission : response.data.co2_emission}))
-    })
-    .catch(error => {
-      console.error('Error uploading request:', error);
-    })
-    .finally(() => {
-      setLoading(false);
-    });
-  };
-  const handleDevbutton = () =>{
-    setLoading(true);
-   
-    axios
-    .post('http://127.0.0.1:8000/api/calculate/', devResquest)
-    .then(response=>{
-     
-      console.log(`fuel consumtion: ${response.data.fuel_consumption}`)
-      console.log(`co2 emisstion : ${response.data.co2_emission}`)
-      if(response.data.estimated_route){
-        setReturnedRes(prev=>({...prev, generated_route_data : response.data.estimated_route}))
-      }
-      setReturnedRes(prev=>({...prev, duty_cycle_data : response.data.duty_cycle }))
-      setReturnedRes(prev=>({...prev, speed_power_curve : response.data.speed_power_curve}))
-      setReturnedRes(prev=>({...prev, fuel_consumption : response.data.fuel_consumption}))
-      setReturnedRes(prev=>({...prev, co2_emission : response.data.co2_emission}))
-    })
-    .catch(error => {
-      console.error('Error uploading request:', error);
-    })
-    .finally(() => {
-      setLoading(false);
-    });
-  }
-  
+      .post('http://127.0.0.1:8000/api/calculate/', finalResquest)
+      .then(response => {
 
-  const closeModal = () =>{
+        console.log(`fuel consumtion: ${response.data.fuel_consumption}`)
+        console.log(`all res : ${JSON.stringify(response.data)}`)
+        if (response.data.estimated_route) {
+          setReturnedRes(prev => ({ ...prev, generated_route_data: response.data.estimated_route }))
+        }
+
+        setReturnedRes(prev => ({ ...prev, duty_cycle_data: response.data.duty_cycle }))
+        setReturnedRes(prev => ({ ...prev, speed_power_curve: response.data.speed_power_curve }))
+        setReturnedRes(prev => ({ ...prev, fuel_consumption: response.data.fuel_consumption }))
+        setReturnedRes(prev => ({ ...prev, co2_emission: response.data.co2_emission }))
+      })
+      .catch(error => {
+        console.error('Error uploading request:', error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+  const handleDevbutton = () => {
+    setLoading(true);
+
+    axios
+      .post('http://127.0.0.1:8000/api/calculate/', devResquest)
+      .then(response => {
+
+        console.log(`fuel consumtion: ${response.data.fuel_consumption}`)
+        console.log(`co2 emisstion : ${response.data.co2_emission}`)
+        if (response.data.estimated_route) {
+          setReturnedRes(prev => ({ ...prev, generated_route_data: response.data.estimated_route }))
+        }
+        setReturnedRes(prev => ({ ...prev, duty_cycle_data: response.data.duty_cycle }))
+        setReturnedRes(prev => ({ ...prev, speed_power_curve: response.data.speed_power_curve }))
+        setReturnedRes(prev => ({ ...prev, fuel_consumption: response.data.fuel_consumption }))
+        setReturnedRes(prev => ({ ...prev, co2_emission: response.data.co2_emission }))
+      })
+      .catch(error => {
+        console.error('Error uploading request:', error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+
+
+  const closeModal = () => {
     setModelIsOpen(false);
   }
- 
-  const renderUseReceptDetail = ()=>{
-    let dutycycle_hint 
+
+  const renderUseReceptDetail = () => {
+    let dutycycle_hint
     let historical_route_hint
     let ports_hint
 
-    let general_hint  
+    let general_hint
     finalResquest.duty_cycle ? dutycycle_hint = <tr><td>Duty Cycle</td><td>Provided</td></tr> : dutycycle_hint = <tr><td>Duty Cycle</td><td>Absent</td></tr>
-    finalResquest.historical_route ? historical_route_hint = <tr><td>Histoical Route</td><td>Provided</td></tr> :historical_route_hint = <tr><td>Histoical Route</td><td>Absent</td></tr>  
-    finalResquest.ports? ports_hint = <tr><td>Ports</td><td>Provided</td></tr> : ports_hint = <tr><td>Ports</td><td>Absent</td></tr> 
+    finalResquest.historical_route ? historical_route_hint = <tr><td>Histoical Route</td><td>Provided</td></tr> : historical_route_hint = <tr><td>Histoical Route</td><td>Absent</td></tr>
+    finalResquest.ports ? ports_hint = <tr><td>Ports</td><td>Provided</td></tr> : ports_hint = <tr><td>Ports</td><td>Absent</td></tr>
     return (
       <>
         {dutycycle_hint}
@@ -244,125 +234,86 @@ function App() {
         {ports_hint}
       </>
     )
-    /** 
-    switch (finalResquest.provided_evidence){
-      case "duty_cycle":
-        return(
-          <>
-            <tr><td>Duty Cycle</td><td>Provided</td></tr>
-            <tr><td>Histoical Route</td><td>Not Required</td></tr>
-            <tr><td>Ports</td><td>Not Required</td></tr>
-          </>
-        )
-      case "historical_route":
-        return(
-          <>
-            <tr><td>Duty Cycle</td><td>Absent</td></tr>
-            <tr><td>Histoical Route</td><td>Provided</td></tr>
-            <tr><td>Ports</td><td>Not Required</td></tr>
-            <tr><td colSpan={2}>Duty Cycle is Generated base on Historical Route</td></tr>
-          </>
-        )
-      case "ports":
-        return(
-          <>
-            <tr><td>Duty Cycle</td><td>Absent</td></tr>
-            <tr><td>Histoical Route</td><td>Absent</td></tr>
-            <tr><td>Depature</td><td>{finalResquest.ports_data[0]}</td></tr>
-            <tr><td>Arrival</td><td>{finalResquest.ports_data[1]}</td></tr>
-            <tr><td colSpan={2}>Duty Cycle is Generated Based on Ports Information</td></tr>
-          </>
-        )
-      default:
-        <>
-            <tr><td>Duty Cycle</td><td>Absent</td></tr>
-            <tr><td>Histoical Route</td><td>Absent</td></tr>
-            <tr><td>Depature</td><td>Absent</td></tr>
-            <tr><td>Arrival</td><td>Absent</td></tr>
-    
-        </>
-    }*/
-  } 
-  const renderSpfPwr=()=>{return (componentStats['SpdPwr'] ? <SpdPwrCurve prev = {finish_setup} branch = {display_spdpwrgen} next = {display_dutycycle}></SpdPwrCurve>:null)}
-  const renderSSPdPwrGen = ()=>{return(componentStats['SpdPwrGen']? <GenerateSpdPwr prev ={display_spdpwr} next={display_dutycycle}></GenerateSpdPwr>:null)}
-  const renderDutyCycle=()=>{return(componentStats['DutyCycle'] ? <DutyCycle prev={display_spdpwr} next = {display_powertrain} branch={display_historical}></DutyCycle> : null)}
-  const renderPowerTrain =()=>{return(componentStats['PowerTrainConfig'] ? <PowerTrain prev ={display_dutycycle} next = {finish_setup}></PowerTrain> : null)}
-  const renderHistoyPath =()=>{ return(componentStats['HistoryPath'] ? <HistoricalPath prev ={display_dutycycle} branch = {display_ports} next ={display_powertrain}></HistoricalPath> : null)}
-  const renderPorts =()=>{return(componentStats['Ports'] ? <Ports prev={display_historical} next ={display_powertrain}></Ports> :null)}
-  return ( 
-    <div className='app-container'>
-        <div className='setup-column'>
-          <div className='title-section'><h3>NMS Carbon Calculation Tool</h3></div>
-          
-          <div className='button-section'>
-            <button onClick={display_spdpwr}>Start Setup</button>
-            <button onClick={finish_setup}>Reset</button>
-          </div>
-          <div className='button-section'>
-            <button onClick={toggleSpdPwr}>Speed Power Curve</button>
-            <button onClick={toggleDutyCycle}>Duty Cycle</button>
-          </div>
-          <div className='button-section'>
-            <button onClick={toggleHistroy}>Route</button>
-            <button onClick={handleDevbutton} disabled={loading}>
-              {loading ? (
-                  <ClipLoader color="#09f" loading={loading} size={12} />
-                ) : (
-                  "Dev Button"
-                )}
-            </button>
-          </div>
-         
-          <div className='infor-record'>
-              <table>
-                <caption>User Receipt</caption>
-                <thead><tr><th>Item</th><th>Value</th></tr></thead>
-                <tbody>
-                    <tr><td>Speed Power Curve </td><td>{finalResquest.spd_power.length >0 ? "Check" : "Absent"}</td></tr>
-                    {renderUseReceptDetail()}
-                    <tr><td colSpan={2}>-------Vessel Information-------</td></tr>
-                    <tr><td>Length</td><td>{finalResquest.design_particulars.length  > 0? `${finalResquest.design_particulars.length} m` : "No Input"}</td></tr>
-                    <tr><td>Breadth</td><td>{finalResquest.design_particulars.breadth > 0? `${finalResquest.design_particulars.breadth} m`: "No Input"}</td></tr>
-                    <tr><td>Draught</td><td>{finalResquest.design_particulars.draught > 0? `${finalResquest.design_particulars.draught} m` : "No Input"}</td></tr>
-                    <tr><td>Block Coeffient</td><td>{finalResquest.design_particulars.block_coefficient > 0? finalResquest.design_particulars.block_coefficient : "No Input"}</td></tr>
-                    
-                </tbody>
-              </table>
-          </div>
-          <div className = "final-button">
-            <button onClick={handleSubmissiton} disabled={loading}>
-              {loading ? (
-                <ClipLoader color="#09f" loading={loading} size={20} />
-              ) : (
-                "Submit"
-              )}
-            </button>
-          </div>
-        </div>
-        <SetFinalAnalysisRequest.Provider value={{setFinalResquest, finalResquest}}>
-          <SetRenderedTags.Provider value = {renderedTags}>
-            <ResultContext.Provider value = {returnedRes}>
-                  <Modal
-                      isOpen={modelIsOpen}
-                      onRequestClose={closeModal}
-                      contentLabel="Task Details"
-                      ariaHideApp={false} 
-                      style={
-                        MODEL_STYLE
-                      }>
-                      {renderSpfPwr()}
-                      {renderSSPdPwrGen()}
-                      {renderDutyCycle()}
-                      {renderPowerTrain()}
-                      {renderHistoyPath()}
-                      {renderPorts()}
 
-                  </Modal>
-                  <Tags></Tags>
-              </ResultContext.Provider>
-            </SetRenderedTags.Provider>
-        </SetFinalAnalysisRequest.Provider>
-        
+  }
+  const renderSpfPwr = () => { return (componentStats['SpdPwr'] ? <SpdPwrCurve prev={finish_setup} branch={display_spdpwrgen} next={display_dutycycle}></SpdPwrCurve> : null) }
+  const renderSSPdPwrGen = () => { return (componentStats['SpdPwrGen'] ? <GenerateSpdPwr prev={display_spdpwr} next={display_dutycycle}></GenerateSpdPwr> : null) }
+  const renderDutyCycle = () => { return (componentStats['DutyCycle'] ? <DutyCycle prev={display_spdpwr} next={display_powertrain} branch={display_historical}></DutyCycle> : null) }
+  const renderPowerTrain = () => { return (componentStats['PowerTrainConfig'] ? <PowerTrain prev={display_dutycycle} next={finish_setup}></PowerTrain> : null) }
+  const renderHistoyPath = () => { return (componentStats['HistoryPath'] ? <HistoricalPath prev={display_dutycycle} branch={display_ports} next={display_powertrain}></HistoricalPath> : null) }
+  const renderPorts = () => { return (componentStats['Ports'] ? <Ports prev={display_historical} next={display_powertrain}></Ports> : null) }
+  return (
+    <div className='app-container'>
+      <div className='setup-column'>
+        <div className='title-section'><h3>NMS Carbon Calculation Tool</h3></div>
+
+        <div className='button-section'>
+          <button onClick={display_spdpwr}>Start Setup</button>
+
+        </div>
+
+        <div className='button-section'>
+          <button onClick={handleDevbutton} disabled={loading}>
+            {loading ? (
+              <ClipLoader color="#09f" loading={loading} size={12} />
+            ) : (
+              "Dev Button"
+            )}
+          </button>
+        </div>
+        <div className='button-section'>
+          <button onClick={handleSubmissiton} disabled={loading}>
+            {loading ? (
+              <ClipLoader color="#09f" loading={loading} size={20} />
+            ) : (
+              "Submit"
+            )}
+          </button>
+        </div>
+
+
+        <div className='infor-record'>
+          <table>
+            <caption>Pre Simulation Check List</caption>
+            <thead><tr><th>Item</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>Speed Power Curve </td><td>{finalResquest.spd_power.length > 0 ? "Check" : "Absent"}</td></tr>
+              {renderUseReceptDetail()}
+              <tr><td colSpan={2}>-------Vessel Information-------</td></tr>
+              <tr><td>Length</td><td>{finalResquest.design_particulars.length > 0 ? `${finalResquest.design_particulars.length} m` : "No Input"}</td></tr>
+              <tr><td>Breadth</td><td>{finalResquest.design_particulars.breadth > 0 ? `${finalResquest.design_particulars.breadth} m` : "No Input"}</td></tr>
+              <tr><td>Draught</td><td>{finalResquest.design_particulars.draught > 0 ? `${finalResquest.design_particulars.draught} m` : "No Input"}</td></tr>
+              <tr><td>Block Coeffient</td><td>{finalResquest.design_particulars.block_coefficient > 0 ? finalResquest.design_particulars.block_coefficient : "No Input"}</td></tr>
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <SetFinalAnalysisRequest.Provider value={{ setFinalResquest, finalResquest }}>
+        <SetRenderedTags.Provider value={renderedTags}>
+          <ResultContext.Provider value={returnedRes}>
+            <Modal
+              isOpen={modelIsOpen}
+              onRequestClose={closeModal}
+              contentLabel="Task Details"
+              ariaHideApp={false}
+              style={
+                MODEL_STYLE
+              }>
+              {renderSpfPwr()}
+              {renderSSPdPwrGen()}
+              {renderDutyCycle()}
+              {renderPowerTrain()}
+              {renderHistoyPath()}
+              {renderPorts()}
+
+            </Modal>
+            <Tags></Tags>
+          </ResultContext.Provider>
+        </SetRenderedTags.Provider>
+      </SetFinalAnalysisRequest.Provider>
+
 
     </div>
   )

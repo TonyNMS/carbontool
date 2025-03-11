@@ -15,9 +15,6 @@ const Summary =()=>{
                     <tr><th></th><th colSpan={2}>Calculation Summary</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td rowSpan={3} className="vertical-text-g1">General Informmation</td><td className="title-column-g1">PlaceHolder1</td><td className="value-columne">{res_co2.toFixed(2)}</td></tr>
-                    <tr><td className="title-column-g1"> PlaceHolder2</td><td className="value-columne">{res_fuel.toFixed(2)}</td></tr>
-                    <tr><td className="title-column-g1">PlaceHolder3</td><td className="value-columne">{res_fuel.toFixed(2)}</td></tr>
                     <tr><td rowSpan={6} className="vertical-text-g2">Vessel Infromation</td><td className="title-column-g2">Vessel Name</td><td className="value-columne">Prince Madog</td></tr>
                     <tr><td className="title-column-g2">Vessel Age (yrs)</td><td className="value-columne">12</td></tr>
                     <tr><td className="title-column-g2">Vessel Owner </td><td className="value-columne">OSE</td></tr>
