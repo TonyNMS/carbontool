@@ -1,6 +1,7 @@
 import React, {useContext} from "react";
 import { ResultContext } from "../App";
 import {Line} from 'react-chartjs-2'
+import "../Styling/MiniSpdPwrPlot.css"
 import {Chart as ChartJS, CategoryScale, LinearScale, LineElement, PointElement, Title, Tooltip, Legend} from "chart.js";
 ChartJS.register(
     CategoryScale,
@@ -11,7 +12,8 @@ ChartJS.register(
     Tooltip,
     Legend
 )
-const SpdPwrChart =()=>{
+
+const SpdPwrPlot =()=>{
     const Uploaded_Evidence = useContext(ResultContext);
     const spdPwrResult = Uploaded_Evidence.speed_power_curve;
     const x_axis  =spdPwrResult.map((item)=>item[0]);
@@ -33,7 +35,7 @@ const SpdPwrChart =()=>{
         responsive: true,
         plugins: {
             legend: { position: 'top' },
-            title: { display: true, text: 'Simulation Data Plot' },
+            title: { display: true, text: 'Speed Power Curve' },
         },
         scales: {
             x: {
@@ -50,12 +52,11 @@ const SpdPwrChart =()=>{
             y: { title: { display: true, text: 'Power (kWatts)' }, beginAtZero:true},
         },
     }
+
     return (
-      
-            <div className = "plot-display-container">
-                <Line data ={data} options={options} className="plot-region"></Line>
-            </div>
-        
+        <div className = "plot-display-container">
+            <Line data ={data} options={options} className="plot-region"></Line>
+        </div>
     )
 }
-export default SpdPwrChart
+export default SpdPwrPlot

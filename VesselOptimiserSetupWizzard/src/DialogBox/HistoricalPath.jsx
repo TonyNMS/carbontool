@@ -73,7 +73,7 @@ function HistoricalPath (props){
                     <input {...getInputProps()}></input>
                     {isDragActive? 
                         <p>Drop you file here</p>:
-                        <p>Upload Duty Cycle:{csvName===""? "None" : csvName}</p>
+                        <p>Upload Your Historical Route: {csvName===""? "None" : csvName}</p>
                     }
                 </div>
             </div>

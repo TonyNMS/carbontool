@@ -10,7 +10,7 @@ import Modal from 'react-modal'
 import GenerateSpdPwr from './Make/GenerateSpdPwr';
 import Tags from './Tags';
 import { ClipLoader } from 'react-spinners';
-import "../src/Styling/button.scss"
+
 
 const MODEL_STYLE = {
   content: {
@@ -29,13 +29,14 @@ const MODEL_STYLE = {
     textAlign: "center",
     boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.08)",
     position: 'absolute',
-    zIndex: '1000'
+    zIndex: 4000
   },
   overlay: {
     backgroundColor: "rgba(122, 117, 117, 0.5)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    zIndex: 2500,
   },
 }
 export const SetRenderedTags = createContext();
@@ -57,7 +58,7 @@ function App() {
   );
 
   const [modelIsOpen, setModelIsOpen] = useState(false);
-  const [renderedTags, setRenderedTags] = useState(['Welcome', 'Summary', "SpdPwr", "History", "DutyCycle"]);
+  const [renderedTags, setRenderedTags] = useState(['Welcome', 'Summary', "SpdPwr", "History", "DutyCycle", "NewWidget"]);
 
   const toggleSpdPwr = () => {
     defineRenderedTag("SpdPwr")
@@ -90,9 +91,11 @@ function App() {
         "block_coefficient": 0.482
       },
       duty_cycle: false,
+      dutycycle_config : false,
       historical_route: false,
       ports: false,
       duty_cycle_data: [],
+      dc_config_data:[],
       historical_route_data: [],
       ports_data: [],
     }
@@ -239,6 +242,7 @@ function App() {
   const renderSpfPwr = () => { return (componentStats['SpdPwr'] ? <SpdPwrCurve prev={finish_setup} branch={display_spdpwrgen} next={display_dutycycle}></SpdPwrCurve> : null) }
   const renderSSPdPwrGen = () => { return (componentStats['SpdPwrGen'] ? <GenerateSpdPwr prev={display_spdpwr} next={display_dutycycle}></GenerateSpdPwr> : null) }
   const renderDutyCycle = () => { return (componentStats['DutyCycle'] ? <DutyCycle prev={display_spdpwr} next={display_powertrain} branch={display_historical}></DutyCycle> : null) }
+  const renderConfigDutyCycle = 0
   const renderPowerTrain = () => { return (componentStats['PowerTrainConfig'] ? <PowerTrain prev={display_dutycycle} next={finish_setup}></PowerTrain> : null) }
   const renderHistoyPath = () => { return (componentStats['HistoryPath'] ? <HistoricalPath prev={display_dutycycle} branch={display_ports} next={display_powertrain}></HistoricalPath> : null) }
   const renderPorts = () => { return (componentStats['Ports'] ? <Ports prev={display_historical} next={display_powertrain}></Ports> : null) }
@@ -270,6 +274,7 @@ function App() {
             )}
           </button>
         </div>
+
 
 
         <div className='infor-record'>

@@ -1,0 +1,104 @@
+/* Container of the entire duty cycle generation section */
+.duty-gen-section {
+    width: 100%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    font-family: sans-serif; /* example font */
+  }
+  
+  /* Carousel container to hold the current card */
+  .carousel-container {
+    position: relative; /* For proper positioning of the card */
+    width: 100%;       /* Adjust as needed */
+    height: 100%;      /* Adjust as needed */
+    overflow: hidden;   /* Hide anything that goes out of the bounds */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin: 1rem 0;
+    background: #f9f9f9; /* Slightly gray background for contrast */
+  }
+  
+  /* The card currently being displayed */
+  .carousel-card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* Start slightly off to the right and transparent, then animate in */
+    transform: translateX(100%);
+    opacity: 0;
+    animation: slideIn 0.5s forwards ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  
+
+  @keyframes slideIn {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+
+  .carousel-controls {
+    display: flex;
+    justify-content: space-between;
+    width: 200px; 
+    margin-top: 1rem;
+  }
+  
+
+  .select-table {
+    border-spacing: 0.5rem;
+    border-width: 2px;
+    border-color: #0056b3;
+  }
+  
+  .select-table td {
+    vertical-align: middle;
+  }
+  
+
+  .input-card-section {
+    width: 100%;
+    height: 100%;
+    background-color: #fff; /* White background for the form area */
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  
+  /* Example styling for inputs, so they look cleaner */
+  .input-card-section input[type="number"],
+  .input-card-section select {
+    width: 100%;
+    padding: 0.4rem;
+    margin: 0.25rem 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  /* Basic button styling */
+  .duty-gen-section button {
+    margin: 0.5rem;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background: #007bff;
+    color: #fff;
+    font-size: 1rem;
+  }
+  
+  .duty-gen-section button:hover {
+    background: #0056b3;
+  }
+  

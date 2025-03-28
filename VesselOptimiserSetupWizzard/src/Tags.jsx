@@ -10,20 +10,24 @@ import "./Styling/Tags.css";
 
 import {SetRenderedTags } from "./App";
 import TestZoom from "./assets/TestZoom";
+import DutyCycleSetUp from "./Tabs/DutyCycleSetUp";
 
 const ALL_TABS = {
     "Welcome":"Welcome Page",
     "SpdPwr":"Speed Power Chart",
-    "History":"Historical Route Chart",
+    "History":"Route Chart",
     "DutyCycle":"Duty Cycle Chart",
-    "Summary" : "General Summary"
+    "Summary" : "General Summary",
+    "NewWidget" : "DutyCycleSetUp"
+
 }
 const ALL_PANELS ={
     "Welcome":<Welcome></Welcome>,
     "SpdPwr":<SpdPwrChart></SpdPwrChart>,
     "History":<HistroicalChart></HistroicalChart>,
     "DutyCycle":<DutyCycleChart></DutyCycleChart>,
-    "Summary" : <Summary></Summary>
+    "Summary" : <Summary></Summary>,
+    "NewWidget":<DutyCycleSetUp></DutyCycleSetUp>
 }
 function Tags(){
     const renderedList = useContext(SetRenderedTags);

@@ -20,14 +20,13 @@ function SpdPwrCurve (props){
                     .map(row => {
                         const columns = row.split(',').map(val => val.trim());
                         if (columns.length === 2) {
-                            return [Number(columns[0]),Number(columns[1])];
+                            return [Number(columns[0]),Number(columns[1])/1000];
                         }
                         return null;                     
                     })
-                    console.log(formattedData);
+                    console.log(JSON.stringify(formattedData));
                     spdPwrCurveContext.setFinalResquest(prev=>({...prev, spd_power : formattedData}))
                 }
-                reader.readAsText(csvFile);
                 setCSVName(csvFile.name);
                 setSpdCurve(true);
                 
