@@ -73,7 +73,6 @@ function GenerateSpdPwr (props){
                 <p>Provided Vessel Displacement ? -------------{spdPwrRequest.vessel_displacement==0? "No Input":`${spdPwrRequest.vessel_displacement} ton`}</p>
                 <p>Provided Vessel Rated Power Output ? -------------{spdPwrRequest.vessel_rated_pwr_output==0? "No Input":`${spdPwrRequest.vessel_rated_pwr_output} kw`}</p>
                 <p>provided Vessel Propellor Count ? -------------{spdPwrRequest.vessel_propellor_count==0? "No Input":`${spdPwrRequest.vessel_rated_pwr_output}`}</p>
-        
                 <p>Condition Fulfilled ? -------------{checkALlInputDone()? "DONE" : "INCOMPLETE"}</p>
             </div>
             <div className="button-section-ports">

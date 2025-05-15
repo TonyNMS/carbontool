@@ -3,7 +3,7 @@ import {useDropzone} from "react-dropzone";
 import { SetFinalAnalysisRequest } from "../App";
 import "../Styling/DutyCycle.css";
 import Modal from 'react-modal'
-import GenerateDutyCycle from "../Make/GenerateDutyCycle";
+import GenerateDutyCycle from "../Deprecated/GenerateDutyCycle";
 import ConfigDutyCycle from "../Make/ConfigDutyCyle";
 const FAKE_DATA_DUTYCYCLE = [
     [0,0],
@@ -15,7 +15,7 @@ const FAKE_DATA_DUTYCYCLE = [
 const MODEL_STYLE = {
     content: {
       maxWidth: "1000px",
-      maxHeight: "55%",
+      maxHeight: "75%",
       height: "auto",
       margin: "auto",
       borderRadius: "8px",
@@ -136,7 +136,7 @@ function DutyCycle (props) {
                 style={
                   MODEL_STYLE
                 }>
-                <ConfigDutyCycle></ConfigDutyCycle>
+                <ConfigDutyCycle closeModal={closeModal}></ConfigDutyCycle>
             </Modal>
         </div>
     )

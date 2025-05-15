@@ -1,6 +1,6 @@
 // ConfigDutyCycle.js
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -10,9 +10,12 @@ import {
 
 import SortableItem from "../DragNDrop/SortableItem"
 import DutyCycleSegmentA from "./DutyCycleSegment_A";
+import DutyCycleSegementB from "./DutyCycleSegment_B";
+import { SetFinalAnalysisRequest } from "../App";
 
-export default function ConfigDutyCycle() {
+export default function ConfigDutyCycle(props) {
   const [items, setItems] = useState([]);
+  const finalRequestContext = useContext(SetFinalAnalysisRequest);
 
   const handleAddTransferSegment = () => {
     const newId = (items.length + 1).toString();
@@ -39,12 +42,8 @@ export default function ConfigDutyCycle() {
       {
         id: newId,
         segmentType: "Job",
-        useDeparturePort: false,
-        useArrivalPort: false,
-        departureCoord: { lat: "", lng: "" },
-        arrivalCoord: { lat: "", lng: "" },
-        speed: "",
-        time: "",
+        segmentPower: "",
+        segmentTimeSpam: "",
       },
     ]);
   };
@@ -74,8 +73,44 @@ export default function ConfigDutyCycle() {
 
   // 5) Final button to see the data in final order
   const handleDone = () => {
-    console.log("Final array of segments:", items);
-    // Each item contains up-to-date data from DutyCycleSegmentA
+    console.log("Final array of segments:", items); // show all times
+    
+    // extract items array and format it to what final reqies want
+    let temp_res = [];
+    temp_res = items.map((item) =>{
+      let obj;
+      if (item.segmentType === "Transfering"){
+        obj ={
+          "segment_type": "Transfer",
+          "start_coord": {
+            "lat": item.departureCoord.lat,
+            "lon": item.departureCoord.lng
+          },
+          "end_coord": {
+            "lat": item.arrivalCoord.lat,
+            "lon": item.arrivalCoord.lng
+          },
+          "speed": item.speed,
+          "time": item.time
+        }
+      }else{
+        obj ={
+          "segment_type": "Job",
+          "average_power": item.segmentPower,
+          "time": item.segmentTimeSpam
+        }
+      }
+      return obj;
+    })
+    // updated the final rresult context 
+    finalRequestContext.setFinalResquest((prev)=> ({...prev, 
+      duty_cycle: false, 
+      duty_cycle_data: [], 
+      dutycycle_config : true,
+      dc_config_data:temp_res
+    }))
+    props.closeModal();
+
   };
 
   return (
@@ -94,13 +129,16 @@ export default function ConfigDutyCycle() {
             {items.length === 0 ? (
               <p>No items yet.</p>
             ) : (
-              // Render each item
+              // Render each item, base on if they are transfer or job, use different template
               items.map((item, index) => (
                 <SortableItem key={item.id} id={item.id}>
-                  <DutyCycleSegmentA
+                  {item.segmentType === "Transfering" ? <DutyCycleSegmentA
                     segmentData={item}
                     onChange={(newData) => handleSegmentChange(index, newData)}
-                  />
+                  /> : <DutyCycleSegementB
+                    segmentData={item}
+                    onChange={(newData) => handleSegmentChange(index, newData)}
+                  />}
                 </SortableItem>
               ))
             )}

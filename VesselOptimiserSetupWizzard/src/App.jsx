@@ -5,9 +5,9 @@ import SpdPwrCurve from './DialogBox/SpdPwrCurve';
 import DutyCycle from './DialogBox/DutyCycyle';
 import PowerTrain from './DialogBox/PowerTrain';
 import HistoricalPath from './DialogBox/HistoricalPath';
-import Ports from './DialogBox/Ports'
+import Ports from './Deprecated/Ports'
 import Modal from 'react-modal'
-import GenerateSpdPwr from './Make/GenerateSpdPwr';
+import GenerateSpdPwr from './Deprecated/GenerateSpdPwr';
 import Tags from './Tags';
 import { ClipLoader } from 'react-spinners';
 import Season from './DialogBox/Season';
@@ -222,7 +222,7 @@ function App() {
   }
 
   const handleDevButton2 =()=>{
-    console.log(finalResquest);
+    console.log(JSON.stringify(finalResquest));
   }
 
 
@@ -234,8 +234,7 @@ function App() {
     let dutycycle_hint
     let historical_route_hint
     let ports_hint
-
-    let general_hint
+    
     finalResquest.duty_cycle ? dutycycle_hint = <tr><td>Duty Cycle</td><td>Provided</td></tr> : dutycycle_hint = <tr><td>Duty Cycle</td><td>Absent</td></tr>
     finalResquest.historical_route ? historical_route_hint = <tr><td>Histoical Route</td><td>Provided</td></tr> : historical_route_hint = <tr><td>Histoical Route</td><td>Absent</td></tr>
     finalResquest.ports ? ports_hint = <tr><td>Ports</td><td>Provided</td></tr> : ports_hint = <tr><td>Ports</td><td>Absent</td></tr>
