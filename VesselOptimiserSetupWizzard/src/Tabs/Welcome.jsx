@@ -6,7 +6,7 @@ const Welcome =()=>{
     return(
         <div className="welcome-section">
             <img src={FULL_LOGO} className="static_pic"></img>
-            <h1 className="fancy-title">Carbon Calculation Tool</h1>
+            <h1 className="fancy-title">Marine Emission Forecast Tool</h1>
             <p className="subtitle">Select "Start Setup" to Begin the Process</p>
         </div>
         

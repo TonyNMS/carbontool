@@ -67,7 +67,12 @@ const DutyCycleSegement_B = ()=>{
             }
             setSegmentData(segmentObject)
         }
-        
+        const handleConfirmTransfer =()=>{
+
+        }
+        const handleConfirmJob = ()=>{
+            
+        }
         return(
             <div>   
                 

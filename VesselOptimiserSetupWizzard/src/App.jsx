@@ -10,6 +10,7 @@ import Modal from 'react-modal'
 import GenerateSpdPwr from './Make/GenerateSpdPwr';
 import Tags from './Tags';
 import { ClipLoader } from 'react-spinners';
+import Season from './DialogBox/Season';
 
 
 const MODEL_STYLE = {
@@ -91,12 +92,13 @@ function App() {
         "block_coefficient": 0.482
       },
       duty_cycle: false,
-      dutycycle_config : false,
-      historical_route: false,
-      ports: false,
       duty_cycle_data: [],
+      dutycycle_config : false,
       dc_config_data:[],
+      season : "Winter",
+      historical_route: false,
       historical_route_data: [],
+      ports: false,
       ports_data: [],
     }
   )
@@ -124,7 +126,8 @@ function App() {
       DutyCycle: input === 'DutyCycle',
       PowerTrainConfig: input === 'PowerTrainConfig',
       HistoryPath: input === 'HistoryPath',
-      Ports: input === 'Ports'
+      Ports: input === 'Ports',
+      Season: input === 'Season'
     }
   }
   const [componentStats, setComponentStats] = useState({
@@ -133,7 +136,8 @@ function App() {
     'DutyCycle': false,
     'PowerTrainConfig': false,
     'HistoryPath': false,
-    'Ports': false
+    'Ports': false,
+    'Season' :false
   })
   const display_spdpwr = () => {
     setComponentStats((prevState) => (changedComponentsStats('SpdPwr')));
@@ -151,6 +155,9 @@ function App() {
   }
   const display_ports = () => {
     setComponentStats((prevState) => (changedComponentsStats('Ports')));
+  }
+  const display_season = () =>{
+    setComponentStats((prevState)=>(changedComponentsStats('Season')));
   }
   const display_powertrain = () => {
     setComponentStats((prevState) => (changedComponentsStats('PowerTrainConfig')));
@@ -242,14 +249,14 @@ function App() {
   const renderSpfPwr = () => { return (componentStats['SpdPwr'] ? <SpdPwrCurve prev={finish_setup} branch={display_spdpwrgen} next={display_dutycycle}></SpdPwrCurve> : null) }
   const renderSSPdPwrGen = () => { return (componentStats['SpdPwrGen'] ? <GenerateSpdPwr prev={display_spdpwr} next={display_dutycycle}></GenerateSpdPwr> : null) }
   const renderDutyCycle = () => { return (componentStats['DutyCycle'] ? <DutyCycle prev={display_spdpwr} next={display_powertrain} branch={display_historical}></DutyCycle> : null) }
-  const renderConfigDutyCycle = 0
-  const renderPowerTrain = () => { return (componentStats['PowerTrainConfig'] ? <PowerTrain prev={display_dutycycle} next={finish_setup}></PowerTrain> : null) }
+  const renderPowerTrain = () => { return (componentStats['PowerTrainConfig'] ? <PowerTrain prev={display_dutycycle} next={display_season}></PowerTrain> : null) }
   const renderHistoyPath = () => { return (componentStats['HistoryPath'] ? <HistoricalPath prev={display_dutycycle} branch={display_ports} next={display_powertrain}></HistoricalPath> : null) }
   const renderPorts = () => { return (componentStats['Ports'] ? <Ports prev={display_historical} next={display_powertrain}></Ports> : null) }
+  const renderSeasons = ()=> {return (componentStats['Season'] ? <Season prev={display_powertrain} next={finish_setup}></Season> :null)};
   return (
     <div className='app-container'>
       <div className='setup-column'>
-        <div className='title-section'><h3>NMS Carbon Calculation Tool</h3></div>
+        <div className='title-section'><h3>Marine Emission Forcast Tool</h3></div>
 
         <div className='button-section'>
           <button onClick={display_spdpwr}>Start Setup</button>
@@ -312,6 +319,7 @@ function App() {
               {renderPowerTrain()}
               {renderHistoyPath()}
               {renderPorts()}
+              {renderSeasons()}
 
             </Modal>
             <Tags></Tags>
