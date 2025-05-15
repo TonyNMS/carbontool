@@ -8,7 +8,7 @@ const Season =(props)=>{
         setSelectedSeason(prev => prev === "Summer" ?  "Winter": "Summer");
     };
     const handleNextStep = () =>{
-        finalRequestContext.setFinalReqestion(prev =>({...prev, season:{selectedSeason}}));
+        finalRequestContext.setFinalResquest((prev) =>({...prev, season:{selectedSeason}}));
         return props.next();
     }
 
@@ -31,7 +31,7 @@ const Season =(props)=>{
         </div>
         <div className="button-section-season">
             <button className="button-a" onClick={props.prev}>Go Back</button>
-            <button className="button-b" onClick={handleNextStep}>Next Step</button>
+            <button className="button-b" onClick={handleNextStep}>Finish Setup</button>
         </div>
      </div>
     )

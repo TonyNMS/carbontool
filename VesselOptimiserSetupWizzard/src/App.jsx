@@ -95,11 +95,9 @@ function App() {
       duty_cycle_data: [],
       dutycycle_config : false,
       dc_config_data:[],
-      season : "Winter",
+      season : "Summer",
       historical_route: false,
       historical_route_data: [],
-      ports: false,
-      ports_data: [],
     }
   )
   const [devResquest, setDevResquest] = useState(
@@ -223,6 +221,10 @@ function App() {
       });
   }
 
+  const handleDevButton2 =()=>{
+    console.log(finalResquest);
+  }
+
 
   const closeModal = () => {
     setModelIsOpen(false);
@@ -250,13 +252,13 @@ function App() {
   const renderSSPdPwrGen = () => { return (componentStats['SpdPwrGen'] ? <GenerateSpdPwr prev={display_spdpwr} next={display_dutycycle}></GenerateSpdPwr> : null) }
   const renderDutyCycle = () => { return (componentStats['DutyCycle'] ? <DutyCycle prev={display_spdpwr} next={display_powertrain} branch={display_historical}></DutyCycle> : null) }
   const renderPowerTrain = () => { return (componentStats['PowerTrainConfig'] ? <PowerTrain prev={display_dutycycle} next={display_season}></PowerTrain> : null) }
-  const renderHistoyPath = () => { return (componentStats['HistoryPath'] ? <HistoricalPath prev={display_dutycycle} branch={display_ports} next={display_powertrain}></HistoricalPath> : null) }
-  const renderPorts = () => { return (componentStats['Ports'] ? <Ports prev={display_historical} next={display_powertrain}></Ports> : null) }
+  const renderHistoyPath = () => { return (componentStats['HistoryPath'] ? <HistoricalPath prev={display_dutycycle} branch={display_powertrain} next={display_powertrain}></HistoricalPath> : null) }
+  //const renderPorts = () => { return (componentStats['Ports'] ? <Ports prev={display_historical} next={display_powertrain}></Ports> : null) }
   const renderSeasons = ()=> {return (componentStats['Season'] ? <Season prev={display_powertrain} next={finish_setup}></Season> :null)};
   return (
     <div className='app-container'>
       <div className='setup-column'>
-        <div className='title-section'><h3>Marine Emission Forcast Tool</h3></div>
+        <div className='title-section'><h3>Marine Emission Forecast Tool</h3></div>
 
         <div className='button-section'>
           <button onClick={display_spdpwr}>Start Setup</button>
@@ -269,6 +271,15 @@ function App() {
               <ClipLoader color="#09f" loading={loading} size={12} />
             ) : (
               "Dev Button"
+            )}
+          </button>
+        </div>
+        <div className='button-section'>
+          <button onClick={handleDevButton2} disabled={loading}>
+            {loading ? (
+              <ClipLoader color="#09f" loading={loading} size={20} />
+            ) : (
+              "Dev Button2"
             )}
           </button>
         </div>
@@ -318,7 +329,6 @@ function App() {
               {renderDutyCycle()}
               {renderPowerTrain()}
               {renderHistoyPath()}
-              {renderPorts()}
               {renderSeasons()}
 
             </Modal>

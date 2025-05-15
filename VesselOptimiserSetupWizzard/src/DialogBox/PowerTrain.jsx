@@ -79,7 +79,7 @@ function PowerTrain(props){
             </div>
             <div className="button-section-pwr">
                 <button className="button-a" onClick={props.prev}>Go Back</button>
-                <button className="button-b" onClick={handleNextSection}>Finish Set Up</button>
+                <button className="button-b" onClick={handleNextSection}>Next Step</button>
             </div>
         </div>
     )
