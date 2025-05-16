@@ -83,21 +83,21 @@ export default function ConfigDutyCycle(props) {
         obj ={
           "segment_type": "Transfer",
           "start_coord": {
-            "lat": item.departureCoord.lat,
-            "lon": item.departureCoord.lng
+            "lat": Number(item.departureCoord.lat),
+            "lon": Number(item.departureCoord.lng)
           },
           "end_coord": {
-            "lat": item.arrivalCoord.lat,
-            "lon": item.arrivalCoord.lng
+            "lat": Number(item.arrivalCoord.lat),
+            "lon": Number(item.arrivalCoord.lng)
           },
-          "speed": item.speed,
-          "time": item.time
+          "speed": Number(item.speed),
+          "time": Number(item.time)
         }
       }else{
         obj ={
           "segment_type": "Job",
-          "average_power": item.segmentPower,
-          "time": item.segmentTimeSpam
+          "average_power": Number(item.segmentPower),
+          "time": Number(item.segmentTimeSpam)
         }
       }
       return obj;
