@@ -18,7 +18,7 @@ const ALL_TABS = {
     "History":"Route Chart",
     "DutyCycle":"Duty Cycle Chart",
     "Summary" : "General Summary",
-    "NewWidget" : "DutyCycleSetUp"
+    
 
 }
 const ALL_PANELS ={
@@ -27,7 +27,7 @@ const ALL_PANELS ={
     "History":<HistroicalChart></HistroicalChart>,
     "DutyCycle":<DutyCycleChart></DutyCycleChart>,
     "Summary" : <Summary></Summary>,
-    "NewWidget":<DutyCycleSetUp></DutyCycleSetUp>
+ 
 }
 function Tags(){
     const renderedList = useContext(SetRenderedTags);
