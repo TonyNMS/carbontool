@@ -8,7 +8,7 @@ const Season =(props)=>{
         setSelectedSeason(prev => prev === "Summer" ?  "Winter": "Summer");
     };
     const handleNextStep = () =>{
-        finalRequestContext.setFinalResquest((prev) =>({...prev, season:{selectedSeason}}));
+        finalRequestContext.setFinalResquest((prev) =>({...prev, season:selectedSeason}));
         return props.next();
     }
 

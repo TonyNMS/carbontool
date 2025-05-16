@@ -26,8 +26,8 @@ export default function ConfigDutyCycle(props) {
         segmentType: "Transfering",
         useDeparturePort: true,
         useArrivalPort: true,
-        departureCoord: { lat: "", lng: "" },
-        arrivalCoord: { lat: "", lng: "" },
+        departureCoord: { lat: "", lon: "" },
+        arrivalCoord: { lat: "", lon: "" },
         speed: "",
         time: "",
       },
@@ -106,8 +106,8 @@ export default function ConfigDutyCycle(props) {
     finalRequestContext.setFinalResquest((prev)=> ({...prev, 
       duty_cycle: false, 
       duty_cycle_data: [], 
-      dutycycle_config : true,
-      dc_config_data:temp_res
+      duty_cycle_config : true,
+      duty_cycle_config_data:temp_res
     }))
     props.closeModal();
 

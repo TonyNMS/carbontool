@@ -12,7 +12,72 @@ import Tags from './Tags';
 import { ClipLoader } from 'react-spinners';
 import Season from './DialogBox/Season';
 
-
+const DEV_REQST ={
+        "spd_power": [],
+        "design_particulars": {
+            "length": 28.5,
+            "breadth": 8.0,
+            "draught": 1.7,
+            "block_coefficient": 0.482
+        },
+        "duty_cycle": false,
+        "duty_cycle_data": [],
+        "duty_cycle_config": true,
+        "duty_cycle_config_data": [
+        {
+            "segment_type": "Transfer",
+            "start_coord": {
+                "lat": 53.870879,
+                "lon": 8.712941
+            },
+            "end_coord": {
+                "lat": 54.316667,
+                "lon": 5.866667
+            },
+            "speed": 9.2,
+            "time": 11.3
+        },
+        {
+            "segment_type": "Job",
+            "average_power": 150,
+            "time": 72
+        },
+        {
+            "segment_type": "Transfer",
+            "start_coord": {
+                "lat": 54.316667,
+                "lon": 5.866667
+            },
+            "end_coord": {
+                "lat": 54.433333,
+                "lon": 7.683333
+            },
+            "speed": 9.2,
+            "time": 7.0
+        },
+        {
+            "segment_type": "Job",
+            "average_power": 150,
+            "time": 72
+        },
+        {
+            "segment_type": "Transfer",
+            "start_coord": {
+                "lat": 54.433333,
+                "lon": 7.683333
+            },
+            "end_coord": {
+                "lat": 53.870879,
+                "lon": 8.712941
+            },
+            "speed": 9.2,
+            "time": 5.4
+        }
+        ],
+        "season": "Winter",
+        "historical_route": false,
+        "historical_route_data": []
+    }
 const MODEL_STYLE = {
   content: {
     maxWidth: "1000px",
@@ -89,34 +154,19 @@ function App() {
         "length": 29.622,
         "breadth": 8.50,
         "draught": 3.70,
-        "block_coefficient": 0.482
+        "block_coefficient": 0.482,
+        "speed": 9.2,
       },
       duty_cycle: false,
       duty_cycle_data: [],
-      dutycycle_config : false,
-      dc_config_data:[],
+      duty_cycle_config : false,
+      duty_cycle_config_data:[],
       season : "Summer",
       historical_route: false,
       historical_route_data: [],
     }
   )
-  const [devResquest, setDevResquest] = useState(
-    {
-      spd_power: [],
-      design_particulars: {
-        "length": 29.622,
-        "breadth": 8.50,
-        "draught": 3.70,
-        "block_coefficient": 0.482
-      },
-      duty_cycle: false,
-      historical_route: false,
-      ports: true,
-      duty_cycle_data: [],
-      historical_route_data: [],
-      ports_data: ["TYN", "CUX"],
-    }
-  )
+  
   const changedComponentsStats = (input) => {
     return {
       SpdPwr: input === 'SpdPwr',
@@ -175,7 +225,7 @@ function App() {
     console.log(finalResquest.duty_cycle_data)
 
     axios
-      .post('http://127.0.0.1:8000/api/calculate/', finalResquest)
+      .post('http://10.123.0.61:8000/api/calculate/', finalResquest)
       .then(response => {
 
         console.log(`fuel consumtion: ${response.data.fuel_consumption}`)
@@ -200,7 +250,7 @@ function App() {
     setLoading(true);
 
     axios
-      .post('http://127.0.0.1:8000/api/calculate/', devResquest)
+      .post('http://127.0.0.1:8000/api/calculate/', DEV_REQST)
       .then(response => {
 
         console.log(`fuel consumtion: ${response.data.fuel_consumption}`)
@@ -231,18 +281,18 @@ function App() {
   }
 
   const renderUseReceptDetail = () => {
-    let dutycycle_hint
-    let historical_route_hint
-    let ports_hint
-    
+    let dutycycle_hint;
+    let historical_route_hint;
+    let dutycycle_config_hint;
     finalResquest.duty_cycle ? dutycycle_hint = <tr><td>Duty Cycle</td><td>Provided</td></tr> : dutycycle_hint = <tr><td>Duty Cycle</td><td>Absent</td></tr>
     finalResquest.historical_route ? historical_route_hint = <tr><td>Histoical Route</td><td>Provided</td></tr> : historical_route_hint = <tr><td>Histoical Route</td><td>Absent</td></tr>
-    finalResquest.ports ? ports_hint = <tr><td>Ports</td><td>Provided</td></tr> : ports_hint = <tr><td>Ports</td><td>Absent</td></tr>
+    finalResquest.dutycycle_config ? dutycycle_config_hint = <tr><td>Configured Duty Cycle</td><td>Provided</td></tr> : dutycycle_config_hint = <tr><td>Configured Duty Cycle</td><td>None</td></tr>
+   
     return (
       <>
         {dutycycle_hint}
+        {dutycycle_config_hint}
         {historical_route_hint}
-        {ports_hint}
       </>
     )
 
