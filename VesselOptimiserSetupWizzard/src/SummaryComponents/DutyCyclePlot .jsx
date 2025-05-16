@@ -15,17 +15,17 @@ ChartJS.register(
 const DutyCyclePlot =()=>{
     const Uploaded_Evidence = useContext(ResultContext);
     const dutyCycle = Uploaded_Evidence.duty_cycle_data;
-    const x_axis =dutyCycle.map((item)=>item[0]);
+    const x_axis =dutyCycle.map((item)=>item[0] / 3600);
+
     const data = {
         labels:x_axis,
         datasets: [{
             label : 'Duty Cycle ',
             data : dutyCycle.map((item)=>item[1]),
-            borderColor: `hsl(${(3 * 50) % 360}, 70%, 50%)`, 
-            backgroundColor: `hsla(${(3 * 50) % 360}, 70%, 50%, 0.5)`,
-            borderWidth: 1,
+            borderColor: `rgba(0, 0, 0, 1.0)`, 
+            backgroundColor: `rgba(0, 0, 0, 1.0)`,
+            borderWidth: 4,
             pointRadius:0,
-            tension: 0.2,
             fill : false,
         }]
     }
@@ -39,7 +39,7 @@ const DutyCyclePlot =()=>{
             x: {
                 type: 'linear',
                 title: { 
-                    display: true, text: 'time (s)' },
+                    display: true, text: 'time (hrs)' },
                 ticks:{
                     callback: function(value) {
                         return Math.round(value);

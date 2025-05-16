@@ -20,9 +20,9 @@ const DutyCycleChart =()=>{
         datasets: [{
             label : 'Duty Cycle ',
             data : dutyCycle.map((item)=>item[1]),
-            borderColor: `hsl(${(3 * 50) % 360}, 70%, 50%)`, 
-            backgroundColor: `hsla(${(3 * 50) % 360}, 70%, 50%, 0.5)`,
-            borderWidth: 1,
+            borderColor: `rgba(0, 0, 0, 1.0)`, 
+            backgroundColor: `rgba(0, 0, 0, 1.0)`,
+            borderWidth: 4,
             pointRadius:0,
             tension: 0.2,
             fill : false,
