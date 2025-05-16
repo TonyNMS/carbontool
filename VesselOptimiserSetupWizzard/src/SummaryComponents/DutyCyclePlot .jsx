@@ -22,8 +22,8 @@ const DutyCyclePlot =()=>{
         datasets: [{
             label : 'Duty Cycle ',
             data : dutyCycle.map((item)=>item[1]),
-            borderColor: `rgba(0, 0, 0, 1.0)`, 
-            backgroundColor: `rgba(0, 0, 0, 1.0)`,
+            borderColor: `rgba(15, 8, 150, 1.0)`, 
+            backgroundColor: `rgba(15, 8, 150, 1.0)`,
             borderWidth: 4,
             pointRadius:0,
             fill : false,
