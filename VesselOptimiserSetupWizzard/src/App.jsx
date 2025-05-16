@@ -225,7 +225,7 @@ function App() {
     console.log(finalResquest.duty_cycle_data)
 
     axios
-      .post('http://10.123.0.61:8000/api/calculate/', finalResquest)
+      .post('http://127.0.0.1:8000/api/calculate/', finalResquest)
       .then(response => {
 
         console.log(`fuel consumtion: ${response.data.fuel_consumption}`)
