@@ -14,7 +14,7 @@ ChartJS.register(
 const DutyCycleChart =()=>{
     const Uploaded_Evidence = useContext(ResultContext);
     const dutyCycle = Uploaded_Evidence.duty_cycle_data;
-    const x_axis =dutyCycle.map((item)=>item[0]);
+    const x_axis =dutyCycle.map((item)=>item[0]/3600);
     const data = {
         labels:x_axis,
         datasets: [{
@@ -37,7 +37,7 @@ const DutyCycleChart =()=>{
             x: {
                 type: 'linear',
                 title: { 
-                    display: true, text: 'time (s)' },
+                    display: true, text: 'Time (hrs)' },
                 ticks:{
                     callback: function(value) {
                         return Math.round(value);
@@ -45,7 +45,7 @@ const DutyCycleChart =()=>{
                     color: 'red'
                 }    
             },
-            y: { title: { display: true, text: 'Power' },  beginAtZero:true },
+            y: { title: { display: true, text: 'Power(kWatts)' },  beginAtZero:true },
         },
     }
         return (

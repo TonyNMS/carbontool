@@ -39,7 +39,7 @@ const DutyCyclePlot =()=>{
             x: {
                 type: 'linear',
                 title: { 
-                    display: true, text: 'time (hrs)' },
+                    display: true, text: 'Time (hrs)' },
                 ticks:{
                     callback: function(value) {
                         return Math.round(value);
