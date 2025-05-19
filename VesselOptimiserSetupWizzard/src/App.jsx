@@ -11,6 +11,8 @@ import GenerateSpdPwr from './Deprecated/GenerateSpdPwr';
 import Tags from './Tags';
 import { ClipLoader } from 'react-spinners';
 import Season from './DialogBox/Season';
+import FuelSelection from './DialogBox/FuelSelection';
+import CrewSelection from './DialogBox/CrewSelection';
 
 const DEV_REQST ={
         "spd_power": [],
@@ -175,6 +177,8 @@ function App() {
       PowerTrainConfig: input === 'PowerTrainConfig',
       HistoryPath: input === 'HistoryPath',
       Ports: input === 'Ports',
+      Fuels : input === 'Fuels',
+      Crews: input === 'Crews',
       Season: input === 'Season'
     }
   }
@@ -185,6 +189,8 @@ function App() {
     'PowerTrainConfig': false,
     'HistoryPath': false,
     'Ports': false,
+    'Fuels':false,
+    'Crews': false,
     'Season' :false
   })
   const display_spdpwr = () => {
@@ -203,6 +209,12 @@ function App() {
   }
   const display_ports = () => {
     setComponentStats((prevState) => (changedComponentsStats('Ports')));
+  }
+  const display_crews =()=>{
+    setComponentStats((prevState) => (changedComponentsStats('Crews')));
+  } 
+  const display_fuels =()=>{
+    setComponentStats((prevState) => (changedComponentsStats('Fuels')));
   }
   const display_season = () =>{
     setComponentStats((prevState)=>(changedComponentsStats('Season')));
@@ -286,7 +298,7 @@ function App() {
     let dutycycle_config_hint;
     finalResquest.duty_cycle ? dutycycle_hint = <tr><td>Duty Cycle</td><td>Provided</td></tr> : dutycycle_hint = <tr><td>Duty Cycle</td><td>Absent</td></tr>
     finalResquest.historical_route ? historical_route_hint = <tr><td>Histoical Route</td><td>Provided</td></tr> : historical_route_hint = <tr><td>Histoical Route</td><td>Absent</td></tr>
-    finalResquest.dutycycle_config ? dutycycle_config_hint = <tr><td>Configured Duty Cycle</td><td>Provided</td></tr> : dutycycle_config_hint = <tr><td>Configured Duty Cycle</td><td>None</td></tr>
+    finalResquest.duty_cycle_config ? dutycycle_config_hint = <tr><td>Configured Duty Cycle</td><td>Provided</td></tr> : dutycycle_config_hint = <tr><td>Configured Duty Cycle</td><td>None</td></tr>
    
     return (
       <>
@@ -300,10 +312,12 @@ function App() {
   const renderSpfPwr = () => { return (componentStats['SpdPwr'] ? <SpdPwrCurve prev={finish_setup} branch={display_spdpwrgen} next={display_dutycycle}></SpdPwrCurve> : null) }
   const renderSSPdPwrGen = () => { return (componentStats['SpdPwrGen'] ? <GenerateSpdPwr prev={display_spdpwr} next={display_dutycycle}></GenerateSpdPwr> : null) }
   const renderDutyCycle = () => { return (componentStats['DutyCycle'] ? <DutyCycle prev={display_spdpwr} next={display_powertrain} branch={display_historical}></DutyCycle> : null) }
-  const renderPowerTrain = () => { return (componentStats['PowerTrainConfig'] ? <PowerTrain prev={display_dutycycle} next={display_season}></PowerTrain> : null) }
+  const renderPowerTrain = () => { return (componentStats['PowerTrainConfig'] ? <PowerTrain prev={display_dutycycle} next={display_fuels}></PowerTrain> : null) }
   const renderHistoyPath = () => { return (componentStats['HistoryPath'] ? <HistoricalPath prev={display_dutycycle} branch={display_powertrain} next={display_powertrain}></HistoricalPath> : null) }
   //const renderPorts = () => { return (componentStats['Ports'] ? <Ports prev={display_historical} next={display_powertrain}></Ports> : null) }
-  const renderSeasons = ()=> {return (componentStats['Season'] ? <Season prev={display_powertrain} next={finish_setup}></Season> :null)};
+  const renderSeasons = ()=> {return (componentStats['Season'] ? <Season prev={display_crews} next={finish_setup}></Season> :null)};
+  const renderFuelSelections=()=>{return componentStats['Fuels']? <FuelSelection prev={display_powertrain} next={display_crews}></FuelSelection> : null};
+  const renderCrewSelections=()=>{return componentStats['Crews']? <CrewSelection prev={display_fuels} next={display_season}></CrewSelection> : null};
   return (
     <div className='app-container'>
       <div className='setup-column'>
@@ -378,6 +392,8 @@ function App() {
               {renderDutyCycle()}
               {renderPowerTrain()}
               {renderHistoyPath()}
+              {renderFuelSelections()}
+              {renderCrewSelections()}
               {renderSeasons()}
 
             </Modal>

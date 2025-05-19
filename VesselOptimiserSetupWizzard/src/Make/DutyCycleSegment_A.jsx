@@ -89,7 +89,9 @@ export default function DutyCycleSegmentA({ segmentData, onChange }) {
 
     // Speed, time changes
     function handleSpeedInput(value) {
-        onChange({ ...segmentData, speed: value });
+        onChange({ ...segmentData, speed: value, time: 1 });
+        //temporary input for the time, so the API is not broken
+    
     }
     function handleTimeInput(value) {
         onChange({ ...segmentData, time: value });
@@ -171,21 +173,27 @@ export default function DutyCycleSegmentA({ segmentData, onChange }) {
 
         {/* SPEED / TIME */}
         <div>
+            <label>Speed (Knots): </label>
             <input
             type="number"
-            placeholder="Speed in knots"
+            placeholder="Speed (Knots)"
             value={speed}
             onChange={(e) => handleSpeedInput(e.target.value)}
             />
         </div>
-        <div>
-            <input
-            type="number"
-            placeholder="Segment duration in minutes"
-            value={time}
-            onChange={(e) => handleTimeInput(e.target.value)}
-            />
-        </div>
+        {
+            /**
+             * <div>
+                    <input
+                    type="number"
+                    placeholder="Segment Duration (Hours)"
+                    value={time}
+                    onChange={(e) => handleTimeInput(e.target.value)}
+                    />
+                </div>
+             */
+        }
+        
         </div>
     );
 }

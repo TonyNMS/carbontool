@@ -115,10 +115,10 @@ export default function ConfigDutyCycle(props) {
 
   return (
     <div style={{ margin: "2rem" }}>
-      <h2>List of Power Segments</h2>
+      <h2>List of Journey Segments</h2>
       <div
         className="dnd-list"
-        style={{ maxWidth: 600, maxHeight: 500, margin: "auto", overflow: "auto" }}
+        style={{ maxWidth: 800, maxHeight: 700, margin: "auto", overflow: "auto" }}
       >
         <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           {/* We must pass in the array of IDs, for the sorting library */}

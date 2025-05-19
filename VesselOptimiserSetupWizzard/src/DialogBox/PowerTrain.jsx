@@ -60,9 +60,9 @@ function PowerTrain(props){
 
     return(
         <div className="powertrain-section">
-            <h3>About Vessel's Power Train Configuration</h3>
+            <h3>Vessel Design Particulates</h3>
             <div className="selectuon-section">
-                <label>Please provide vessel's power train configuration</label>
+                <label>Vessel design particulates are used to calculate speed power curve</label>
             </div>
             <div className="powertrain-input-section">
                 <table>
