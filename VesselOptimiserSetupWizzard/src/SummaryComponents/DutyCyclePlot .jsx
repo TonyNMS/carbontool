@@ -2,6 +2,7 @@ import React from "react";
 import {useContext} from "react";
 import { ResultContext } from "../App";
 import {Line} from 'react-chartjs-2'
+import "../Styling/Summary_DutyCycle_Plot.css"
 import {Chart as ChartJS, CategoryScale, LinearScale, LineElement, PointElement, Title, Tooltip, Legend} from "chart.js";
 ChartJS.register(
     CategoryScale,
@@ -50,10 +51,11 @@ const DutyCyclePlot =()=>{
             y: { title: { display: true, text: 'Power' },  beginAtZero:true },
         },
     }
+
     return(
-        <div className = "plot-display-container">
-            <Line data ={data} options={options} className="plot-region"></Line>
-        </div>
+        <>
+            <Line data ={data} options={options} className="plot-region" ></Line>
+        </>
     )
 }
 export default DutyCyclePlot

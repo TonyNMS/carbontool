@@ -1,6 +1,7 @@
 import React, {useContext} from "react";
 import { ResultContext } from "../App";
-import {Line} from 'react-chartjs-2'
+import {Line} from 'react-chartjs-2';
+import "../Styling/Summary_Spdr_Plot.css";
 import {Chart as ChartJS, CategoryScale, LinearScale, LineElement, PointElement, Title, Tooltip, Legend} from "chart.js";
 ChartJS.register(
     CategoryScale,
@@ -49,12 +50,11 @@ const SpdPwrChart =()=>{
             y: { title: { display: true, text: 'Power (kWatts)' }, beginAtZero:true},
         },
     }
+
     return (
-      
             <div className = "plot-display-container">
                 <Line data ={data} options={options} className="plot-region"></Line>
             </div>
-        
     )
 }
 export default SpdPwrChart

@@ -1,0 +1,18 @@
+    /* Container that wraps the <Line> */
+.plot-display-container {
+  flex: 1;                /* fill the parent .plot-container */
+  display: flex;          /* enable child stretching */
+  min-height: 0;          /* allow the chart itself to expand fully */
+}
+
+/* ClassName passed to <Line> wrapper */
+.plot-region {
+  flex: 1;                /* take all available space */
+  position: relative;     /* required by Chart.js sizing logic */
+}
+
+/* Force the actual <canvas> to fill its wrapper */
+.plot-region canvas {
+  width: 100% !important;
+  height: 100% !important;
+}

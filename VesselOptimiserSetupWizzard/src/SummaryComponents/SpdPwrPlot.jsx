@@ -54,9 +54,9 @@ const SpdPwrPlot =()=>{
     }
 
     return (
-        <div className = "plot-display-container">
+        <>
             <Line data ={data} options={options} className="plot-region"></Line>
-        </div>
+        </>
     )
 }
 export default SpdPwrPlot

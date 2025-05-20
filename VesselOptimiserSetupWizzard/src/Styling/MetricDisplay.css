@@ -1,26 +1,39 @@
 .metric-display {
+  /* fill its parent (the gauge-container) and stack two items */
   display: flex;
   flex-direction: column;
+  justify-content: space-between; /* value top, label bottom */
   align-items: center;
-  justify-content: center;
   padding: 1rem;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 6px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  height: 100%;           /* important for space-between to work */
+  box-sizing: border-box; /* include padding in height */
 }
 
+/* — VALUE (and optional unit) — */
 .metric-value {
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  font-weight: 700;
-  line-height: 1;
-  color: #1f2937;
-  letter-spacing: -0.02em;
+  font-size: clamp(1rem, 4vw, 1.5rem);
+  font-weight: 400;
+  color: #dd3214;
+  line-height: 1.1;
+  text-align: center;
 }
 
-.metric-label {
-  margin-top: 0.5rem;
-  font-size: 1rem;
+/* If you wrapped unit in a span, style it smaller still */
+.metric-unit {
+  font-size: 0.875rem;
+  font-weight: 400;
   color: #6b7280;
+}
+
+/* — LABEL — */
+.metric-label {
+  font-size: clamp(1.25rem, 5vw, 2rem);
+  font-weight: 700;
+  color: #1f2937;
   text-align: center;
+  margin-top: 0.5rem; /* optional breathing room */
 }

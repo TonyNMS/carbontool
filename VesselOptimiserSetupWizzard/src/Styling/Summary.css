@@ -61,6 +61,13 @@
   border: 1px solid #ddd;
   border-radius: 4px;
 }
+/* Ensure each metric box is exactly the same width and height */
+.summary-column.right .gauge-container > .metric-display {
+  flex: 1;             /* all children grow equally */
+  min-width: 0;        /* allow text to wrap/shrink */
+  height: 100%;        /* fill the container’s height */
+}
+
 
 /* Table container (bottom of right column) */
 .summary-column.right .table-container {
