@@ -1,5 +1,5 @@
 import React from "react";
-
+import '../Styling/FuelDialogBox.css'
 const FuelSelection =(props)=>{
     const handleNextSection=()=>{
         return props.next();

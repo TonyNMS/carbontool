@@ -1,108 +1,151 @@
+/* === Layout of the 3-column dashboard === */
 .summary-section {
-    display: grid;
-    grid-template-columns: 3fr 5fr 2fr;
-    grid-template-rows: 100%;
-    width: 100%;
-    height: 90vh;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    gap: 10px;
-    padding: 10px;
-  }
-  
-  .summary-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .left .plot-container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #ddd;
-    padding: 10px;
-    background: #f9f9f9;
-    position: relative;
-  }
-  
-  .middle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .right .gauge-container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #ddd;
-    padding: 10px;
-    background: #f9f9f9;
-  }
-  
-
-
-
-
-
-
-.summary-section table{
-    margin:auto;
-    border-collapse: collapse;
-    width:100%;
-    border: 1px solid #ccc;
-}
-.summary-section th{
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
-    font-style: bold;
-    font-size: x-large;
-    background-color: #2a9d8f;
-}
-.summary-section td{
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
-    font-style: bold;
-    font-size: large;
-}
-.vertical-text-g1 {
-    writing-mode: sideways-lr; 
-    padding: 5px; /* Adjust padding to fit */
-    max-width:0px;/* Make the cell narrower */
-    background-color: #e0e1dd;
-}
-.vertical-text-g2 {
-    writing-mode: sideways-lr; 
-    padding: 5px; /* Adjust padding to fit */
-    max-width:0px;/* Make the cell narrower */
-    background-color: #ced4da;
+  display: grid;
+  grid-template-columns: 3fr 5fr 2fr;
+  grid-template-rows: 100%;
+  width: 100%;
+  height: 90vh;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  gap: 10px;
+  padding: 10px;
 }
 
+.summary-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* === Left column: two stacked plots === */
+.left .plot-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ddd;
+  padding: 10px;
+  background: #f9f9f9;
+  position: relative;
+}
+
+/* === Middle column: full‐height map === */
+.middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+}
+
+/* === Right column: gauges + table pinned === */
+.summary-column.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* top-align gadgets */
+  gap: 1rem;
+}
+
+/* Gauges container (top of right column) */
+.summary-column.right .gauge-container {
+  flex: none; /* don’t stretch */
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Table container (bottom of right column) */
+.summary-column.right .table-container {
+  flex: none;       /* don’t stretch */
+  margin-top: auto; /* push to bottom */
+  width: 100%;
+  padding: 10px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* === Shared table styling for summary-section tables === */
+.summary-section table {
+  margin: auto;
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ccc;
+}
+
+.summary-section th,
+.summary-section td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  font-size: large;
+  font-weight: bold;
+}
+
+.summary-section th {
+  background-color: #2a9d8f;
+  color: #fff;
+  font-size: x-large;
+}
+
+/* Vertical header cells */
+.vertical-text-g1,
+.vertical-text-g2,
 .vertical-text-g3 {
-    writing-mode: sideways-lr; 
-    padding: 5px; /* Adjust padding to fit */
-    max-width:0px;/* Make the cell narrower */
-    background-color: #e0e1dd;
-}
-.title-column-g1{
-    background-color: #e0e1dd;
-}
-.title-column-g2{
-    background-color: #ced4da;
-}
-.title-column-g3{
-    font-style: italic;
-    background-color: #e0e1dd;
-}
-.value-columne{
-    background-color: #caf0f8;
+  writing-mode: sideways-lr;
+  padding: 5px;
+  max-width: 0;
 }
 
-  
+.vertical-text-g1 { background-color: #e0e1dd; }
+.vertical-text-g2 { background-color: #ced4da; }
+.vertical-text-g3 { background-color: #e0e1dd; }
+
+/* Title columns */
+.title-column-g1 { background-color: #e0e1dd; }
+.title-column-g2 { background-color: #ced4da; }
+.title-column-g3 {
+  background-color: #e0e1dd;
+  font-style: italic;
+}
+
+/* Value columns */
+.value-columne { background-color: #caf0f8; }
+
+/* === CO₂‐per‐capita component (bottom-right) === */
+.crew-co2-summary-section table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.crew-co2-summary-section caption {
+  caption-side: top;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.crew-co2-summary-section th,
+.crew-co2-summary-section td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.crew-co2-summary-section th {
+  background: #2a9d8f;
+  color: #fff;
+}
+
+.crew-co2-summary-section tbody tr:nth-child(odd) {
+  background: #e7f5f5;
+}

@@ -12,7 +12,7 @@ const FuelGauge = () => {
     <div style={{ width: 200, height: 200, textAlign: "center" }}>
       <CircularProgressbar
         value={percentage}
-        text={`${(value/1000).toFixed(2)} Ton`}
+        text={`${(value/1000).toFixed(2)} Tonnes`}
         styles={buildStyles({
           pathColor: percentage > 50 ? "green" : "green",
           textColor: "#000",

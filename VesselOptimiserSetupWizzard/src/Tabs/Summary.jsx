@@ -3,8 +3,11 @@ import "../Styling/Summary.css"
 import SpdPwrPlot from "../SummaryComponents/SpdPwrPlot";
 import DutyCyclePlot from "../SummaryComponents/DutyCyclePlot ";
 import MiniMap from "../SummaryComponents/MiniMap";
-import FuelTankDisp from "../SummaryComponents/FuelTankDisp";
-import Co2Emissioin from "../SummaryComponents/Co2Emission";
+import Co2PerCaptita from "../SummaryComponents/Co2PerCaptita";
+import MetricDisplay from "../SummaryComponents/MetricDisplay";
+import { useContext } from "react";
+import { ResultContext } from "../App";
+const NUMBR_OF_CREW = 8;
 const Summary =()=>{
   
     return(
@@ -27,11 +30,23 @@ const Summary =()=>{
            
             <div className="summary-column right">
                 <div className="gauge-container">
-                    <FuelTankDisp></FuelTankDisp>
+                    <MetricDisplay
+                        label="Total Fuel Consumption"
+                        value={useContext(ResultContext).fuel_consumption / 1000}
+                        unit="Tonnes"
+                        formatter={(v) => v.toFixed(2)}
+                    />
+                    <MetricDisplay
+                        label="Total CO₂ Emission"
+                        value={useContext(ResultContext).co2_emission / 1000}
+                        unit="Tonnes"
+                        formatter={(v) => v.toFixed(2)}
+                    />
                 </div>
-                <div className="gauge-container">
-                    <Co2Emissioin></Co2Emissioin>
-                </div>
+               <div className="table-container">
+                    <Co2PerCaptita crewCount={NUMBR_OF_CREW}/>
+               </div>
+
             </div>
         </div>
     )

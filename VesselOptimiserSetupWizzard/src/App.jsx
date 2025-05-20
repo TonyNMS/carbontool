@@ -124,7 +124,7 @@ function App() {
     }
 
   );
-
+  const [cuewNumber, setCrewNumber] = useState(8);
   const [modelIsOpen, setModelIsOpen] = useState(false);
   const [renderedTags, setRenderedTags] = useState(['Welcome', 'Summary', "SpdPwr", "History", "DutyCycle", "NewWidget"]);
 
@@ -317,7 +317,7 @@ function App() {
   //const renderPorts = () => { return (componentStats['Ports'] ? <Ports prev={display_historical} next={display_powertrain}></Ports> : null) }
   const renderSeasons = ()=> {return (componentStats['Season'] ? <Season prev={display_crews} next={finish_setup}></Season> :null)};
   const renderFuelSelections=()=>{return componentStats['Fuels']? <FuelSelection prev={display_powertrain} next={display_crews}></FuelSelection> : null};
-  const renderCrewSelections=()=>{return componentStats['Crews']? <CrewSelection prev={display_fuels} next={display_season}></CrewSelection> : null};
+  const renderCrewSelections=()=>{return componentStats['Crews']? <CrewSelection prev={display_fuels} next={display_season} setCrewNumber={setCrewNumber}></CrewSelection> : null};
   return (
     <div className='app-container'>
       <div className='setup-column'>
