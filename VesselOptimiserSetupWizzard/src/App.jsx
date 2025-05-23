@@ -20,7 +20,8 @@ const DEV_REQST ={
             "length": 28.5,
             "breadth": 8.0,
             "draught": 1.7,
-            "block_coefficient": 0.482
+            "block_coefficient": 0.482,
+            "speed":9.2
         },
         "duty_cycle": false,
         "duty_cycle_data": [],
@@ -64,7 +65,7 @@ const DEV_REQST ={
             "segment_type": "Job",
             "average_power": 150,
             "time": 72,
-            "fuel":"hydrogen1"
+            "fuel":"diesel1 "
         },
         {
             "segment_type": "Transfer",
