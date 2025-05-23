@@ -31,17 +31,28 @@ const Summary =()=>{
             <div className="summary-column right">
                 <div className="gauge-container">
                     <MetricDisplay
-                        label="Total Fuel Consumption"
+                        label="Fuel Consumption"
                         value={useContext(ResultContext).fuel_consumption / 1000}
                         unit="Tonnes"
                         formatter={(v) => v.toFixed(2)}
                     />
+                </div>
+                <div className = "gauge-container">
                     <MetricDisplay
                         label="Total CO₂ Emission"
                         value={useContext(ResultContext).co2_emission / 1000}
                         unit="Tonnes"
                         formatter={(v) => v.toFixed(2)}
                     />
+                </div>
+                <div className="gauge-container">
+                    <MetricDisplay
+                        label="Total Hydrogen Consumption"
+                        unit = "KG"
+                        value={useContext(ResultContext).h2_comsumpution} 
+                        fomatter={(v)=>v.toFixed(2)}
+                    />
+
                 </div>
                <div className="table-container">
                     <Co2PerCaptita crewCount={NUMBR_OF_CREW}/>
