@@ -30,6 +30,7 @@ export default function ConfigDutyCycle(props) {
         arrivalCoord: { lat: "", lon: "" },
         speed: "",
         time: "",
+        fuel:""
       },
     ]);
   };
@@ -44,6 +45,7 @@ export default function ConfigDutyCycle(props) {
         segmentType: "Job",
         segmentPower: "",
         segmentTimeSpam: "",
+        fuel:""
       },
     ]);
   };
@@ -91,13 +93,15 @@ export default function ConfigDutyCycle(props) {
             "lon": Number(item.arrivalCoord.lng)
           },
           "speed": Number(item.speed),
-          "time": Number(item.time)
+          "time": Number(item.time),
+          "fuel": item.fuel
         }
       }else{
         obj ={
           "segment_type": "Job",
           "average_power": Number(item.segmentPower),
-          "time": Number(item.segmentTimeSpam)
+          "time": Number(item.segmentTimeSpam),
+          "fuel": item.fuel
         }
       }
       return obj;

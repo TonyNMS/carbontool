@@ -37,12 +37,14 @@ const DEV_REQST ={
                 "lon": 5.866667
             },
             "speed": 9.2,
-            "time": 11.3
+            "time": 11.3,
+            "fuel":"diesel1"
         },
         {
             "segment_type": "Job",
             "average_power": 150,
-            "time": 72
+            "time": 72,
+            "fuel":"diesel1",
         },
         {
             "segment_type": "Transfer",
@@ -55,12 +57,14 @@ const DEV_REQST ={
                 "lon": 7.683333
             },
             "speed": 9.2,
-            "time": 7.0
+            "time": 7.0,
+            "fuel":"diesel1"
         },
         {
             "segment_type": "Job",
             "average_power": 150,
-            "time": 72
+            "time": 72,
+            "fuel":"hydrogen1"
         },
         {
             "segment_type": "Transfer",
@@ -73,7 +77,8 @@ const DEV_REQST ={
                 "lon": 8.712941
             },
             "speed": 9.2,
-            "time": 5.4
+            "time": 5.4,
+            "fuel":"diesel1"
         }
         ],
         "season": "Winter",
@@ -120,7 +125,8 @@ function App() {
       generated_route_data: [],
       speed_power_curve: [],
       fuel_consumption: 0,
-      co2_emission: 0
+      co2_emission: 0,
+      h2_comsumpution:0
     }
 
   );
@@ -250,6 +256,7 @@ function App() {
         setReturnedRes(prev => ({ ...prev, speed_power_curve: response.data.speed_power_curve }))
         setReturnedRes(prev => ({ ...prev, fuel_consumption: response.data.fuel_consumption }))
         setReturnedRes(prev => ({ ...prev, co2_emission: response.data.co2_emission }))
+        setReturnedRes(prev => ({ ...prev, h2_comsumpution: response.data.hydrogen_consumption}))
       })
       .catch(error => {
         console.error('Error uploading request:', error);
@@ -274,6 +281,8 @@ function App() {
         setReturnedRes(prev => ({ ...prev, speed_power_curve: response.data.speed_power_curve }))
         setReturnedRes(prev => ({ ...prev, fuel_consumption: response.data.fuel_consumption }))
         setReturnedRes(prev => ({ ...prev, co2_emission: response.data.co2_emission }))
+        setReturnedRes(prev => ({ ...prev, h2_comsumpution: response.data.hydrogen_consumption}))
+
       })
       .catch(error => {
         console.error('Error uploading request:', error);

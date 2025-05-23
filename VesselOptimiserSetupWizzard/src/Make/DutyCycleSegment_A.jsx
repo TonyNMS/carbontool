@@ -10,6 +10,15 @@ const ALL_PORTS = [
   { portsName: "GLW", coords: [55.9260, -4.5064] },
 ];
 
+const ALL_FUEL =[
+    {fuelName:"Select a fuel", fuelData: "diesel1"},
+    {fuelName:"Diesel", fuelData: "diesel1"},
+    {fuelName:"Marine Diesel", fuelData: "diesel2"},
+    {fuelName:"Bio Diesel", fuelData: "diesel3"},
+    {fuelName:"Hydrogen", fuelData:"hydrogen1"},
+    {fuelName:"Methonal",fuelData:"methanol1"},
+    {fuelName:"Heavy Fuel Oil", fuelData: "diesel4"}
+]
 
 export default function DutyCycleSegmentA({ segmentData, onChange }) {
     console.log("DutyCycleSegmentA is rendering for segment ID:", segmentData.id);
@@ -22,7 +31,18 @@ export default function DutyCycleSegmentA({ segmentData, onChange }) {
         speed,
         time,
         segmentType,
+        fuel,
     } = segmentData;
+    
+    const renderAllFuelOptions=()=>{
+        return(
+            ALL_FUEL.map((item, index)=>
+            <option key={`fuel_option_${index}`} value = {item.fuelData}>{item.fuelName}</option>)
+        )
+    }
+    const handleSelectFuelOptions =(e) =>{
+        onChange({...segmentData, fuel: e.target.value})
+    }
 
     
     const displayPortOptions = () =>
@@ -34,7 +54,6 @@ export default function DutyCycleSegmentA({ segmentData, onChange }) {
 
     
     function handleUseDeparturePortChange(checked) {
-       
         onChange({ ...segmentData, useDeparturePort: checked });
     }
 
@@ -181,19 +200,22 @@ export default function DutyCycleSegmentA({ segmentData, onChange }) {
             onChange={(e) => handleSpeedInput(e.target.value)}
             />
         </div>
-        {
-            /**
-             * <div>
-                    <input
-                    type="number"
-                    placeholder="Segment Duration (Hours)"
-                    value={time}
-                    onChange={(e) => handleTimeInput(e.target.value)}
-                    />
-                </div>
-             */
-        }
-        
+        <div>
+            <label>Select A Fuel : </label>
+            <select onChange={e=>handleSelectFuelOptions(e)}>{renderAllFuelOptions()}</select>
+        </div>
+            {
+                /**
+                 * <div>
+                        <input
+                        type="number"
+                        placeholder="Segment Duration (Hours)"
+                        value={time}
+                        onChange={(e) => handleTimeInput(e.target.value)}
+                        />
+                    </div>
+                */
+            }
         </div>
     );
 }
