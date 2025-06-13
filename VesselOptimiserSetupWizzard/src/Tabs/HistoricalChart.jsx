@@ -10,7 +10,6 @@ const HistoricalChart = () => {
   const Uploaded_Evidence = useContext(ResultContext);
   const mapRef = useRef(null);
 
- 
   const coordsList =
     Uploaded_Evidence?.generated_route_data?.[0]?.length > 0
       ? Uploaded_Evidence.generated_route_data[0]
