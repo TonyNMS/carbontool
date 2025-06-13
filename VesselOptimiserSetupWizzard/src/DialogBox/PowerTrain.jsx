@@ -8,6 +8,7 @@ function PowerTrain(props){
         vessel_width : 8.5,
         block_coeffcient : 0.48,
         draught : 3.7,
+        speed : 9.2,
     });
  
     const serFinalRes = useContext(SetFinalAnalysisRequest);
@@ -33,6 +34,11 @@ function PowerTrain(props){
                     ...prev , draught : Number(e.target.value)
                 }))
                 break
+            case "speed":
+                setPwrSpecs((prev)=>({
+                    ...prev, speed : Number(e.target.value)
+                })) 
+                break
         }
     }
     const handleNextSection = () =>{
@@ -50,6 +56,7 @@ function PowerTrain(props){
                         "breadth": pwrSpecs. vessel_width,
                         "draught":  pwrSpecs.draught,
                         "block_coefficient": pwrSpecs.block_coeffcient,
+                        "speed" : 9.2
                       },
                 }
             ))
@@ -74,6 +81,7 @@ function PowerTrain(props){
                         <tr><td>Vessel Breadth</td><td>------</td><td><input type="number" placeholder={`Default to ${pwrSpecs.vessel_width} m`}  name="width" onChange={(e)=>handleVesselParameterInput(e)}></input></td></tr>
                         <tr><td>Draught</td><td>------</td><td><input type="number" placeholder={`Default to ${pwrSpecs.draught} m`}  name="volume" onChange={(e)=>handleVesselParameterInput(e)}></input></td></tr>
                         <tr><td>Block Coeffcient</td><td>------</td><td><input type="number" placeholder={`Default to ${pwrSpecs.block_coeffcient}`}  name="power" onChange={(e)=>handleVesselParameterInput(e)}></input></td></tr>
+                        <tr><td>Vessel Desgined Speed</td><td>------</td><td><input type ="number" placeholder={`Default to ${pwrSpecs.speed} knots`} name="speed" onChange={(e)=>handleVesselParameterInput(e)}></input></td></tr>
                     </tbody>
                 </table>
             </div>

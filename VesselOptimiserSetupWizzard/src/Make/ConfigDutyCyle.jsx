@@ -93,7 +93,7 @@ export default function ConfigDutyCycle(props) {
             "lon": Number(item.arrivalCoord.lng)
           },
           "speed": Number(item.speed),
-          "time": Number(item.time),
+          "time": 10,
           "fuel": item.fuel
         }
       }else{

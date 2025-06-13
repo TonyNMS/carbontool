@@ -8,7 +8,45 @@ import MetricDisplay from "../SummaryComponents/MetricDisplay";
 import { useContext } from "react";
 import { ResultContext } from "../App";
 const NUMBR_OF_CREW = 8;
+
+const ALL_FUEL =[
+    {fuelName:"Marine Diesel", fuelData: "diesel1"},
+    {fuelName:"Bio Diesel", fuelData: "diesel2"},
+    {fuelName:"Marine Gas Oil", fuelData: "diesel3"},
+    {fuelName:"Hydrogen", fuelData:"hydrogen1"},
+    {fuelName:"Methonal",fuelData:"methanol1"},
+    {fuelName:"Heavy Fuel Oil", fuelData: "diesel4"}
+]
 const Summary =()=>{
+    
+    const all_fuel_collection = useContext(ResultContext).fuel_consumption;
+    const fetech_fuel_name = (input)=>{
+        let res = "Undefined";
+        ALL_FUEL.map((item, index)=>{
+          if (item.fuelData === input){
+            res = item.fuelName;
+          }
+        })
+        return res;
+    }
+    const renderMetricsDisplay = () =>{
+        console.log("Rendereing Mertics Display");
+        return (
+            Object.entries(all_fuel_collection).map(
+                ([fuelType, amount])=>
+                    <div className="gauge-container">
+                        {console.log(fetech_fuel_name(fuelType))}
+                        {console.log(amount)}
+                        <MetricDisplay
+                            label={fetech_fuel_name(fuelType)}
+                            value={fuelType.includes("hydrogen")? amount / 1000 : amount / 100}
+                            unit ={"Tonnes"}>
+                        </MetricDisplay>
+                    </div>
+                
+            )
+        )
+    }
   
     return(
         <div className="summary-section">
@@ -29,30 +67,14 @@ const Summary =()=>{
 
            
             <div className="summary-column right">
-                <div className="gauge-container">
-                    <MetricDisplay
-                        label="Fuel Consumption"
-                        value={useContext(ResultContext).fuel_consumption / 1000}
-                        unit="Tonnes"
-                        formatter={(v) => v.toFixed(2)}
-                    />
-                </div>
+                
+                {renderMetricsDisplay()}
                 <div className = "gauge-container">
                     <MetricDisplay
                         label="Total CO₂ Emission"
                         value={useContext(ResultContext).co2_emission / 1000}
                         unit="Tonnes"
-                        formatter={(v) => v.toFixed(2)}
                     />
-                </div>
-                <div className="gauge-container">
-                    <MetricDisplay
-                        label="Total Hydrogen Consumption"
-                        unit = "KG"
-                        value={useContext(ResultContext).h2_comsumpution} 
-                        fomatter={(v)=>v.toFixed(2)}
-                    />
-
                 </div>
                <div className="table-container">
                     <Co2PerCaptita crewCount={NUMBR_OF_CREW}/>

@@ -13,7 +13,58 @@ import { ClipLoader } from 'react-spinners';
 import Season from './DialogBox/Season';
 import FuelSelection from './DialogBox/FuelSelection';
 import CrewSelection from './DialogBox/CrewSelection';
-
+const DEV_REQST_SHORT ={
+  "spd_power": [],
+  "design_particulars": {
+      "length": 28.5,
+      "breadth": 8.0,
+      "draught": 1.7,
+      "block_coefficient": 0.482,
+      "speed":9.2
+  },
+  "duty_cycle": false,
+  "duty_cycle_data": [],
+  "duty_cycle_config": true,
+  "duty_cycle_config_data": [
+  {
+      "segment_type": "Transfer",
+      "start_coord": {
+          "lat": 53.870879,
+          "lon": 8.712941
+      },
+      "end_coord": {
+          "lat": 54.316667,
+          "lon": 5.866667
+      },
+      "speed": 9.2,
+      "time": 11.3,
+      "fuel":"diesel1"
+  },
+  {
+      "segment_type": "Job",
+      "average_power": 150,
+      "time": 72,
+      "fuel":"hydrogen1",
+  },
+  {
+      "segment_type": "Transfer",
+      "start_coord": {
+          "lat": 54.433333,
+          "lon": 7.683333
+      },
+      "end_coord": {
+          "lat": 53.870879,
+          "lon": 8.712941
+      },
+      "speed": 9.2,
+      "time": 5.4,
+      "fuel":"diesel1"
+  }
+  ],
+  "season": "Winter",
+  "historical_route": false,
+  "historical_route_data": []
+}
 const DEV_REQST ={
         "spd_power": [],
         "design_particulars": {
@@ -45,7 +96,7 @@ const DEV_REQST ={
             "segment_type": "Job",
             "average_power": 150,
             "time": 72,
-            "fuel":"diesel1",
+            "fuel":"hydrogen1",
         },
         {
             "segment_type": "Transfer",
@@ -59,13 +110,13 @@ const DEV_REQST ={
             },
             "speed": 9.2,
             "time": 7.0,
-            "fuel":"diesel1"
+            "fuel":"diesel2"
         },
         {
             "segment_type": "Job",
             "average_power": 150,
             "time": 72,
-            "fuel":"diesel1 "
+            "fuel":"hydrogen1"
         },
         {
             "segment_type": "Transfer",
@@ -135,15 +186,7 @@ function App() {
   const [modelIsOpen, setModelIsOpen] = useState(false);
   const [renderedTags, setRenderedTags] = useState(['Welcome', 'Summary', "SpdPwr", "History", "DutyCycle", "NewWidget"]);
 
-  const toggleSpdPwr = () => {
-    defineRenderedTag("SpdPwr")
-  }
-  const toggleDutyCycle = () => {
-    defineRenderedTag("DutyCycle")
-  }
-  const toggleHistroy = () => {
-    defineRenderedTag("History")
-  }
+
   const defineRenderedTag = (input) => {
     if (renderedTags.includes(input)) {
       const newList = renderedTags.filter(item => item !== input)
@@ -164,7 +207,7 @@ function App() {
         "breadth": 8.50,
         "draught": 3.70,
         "block_coefficient": 0.482,
-        "speed": 9.2,
+        "speed" : 9.2
       },
       duty_cycle: false,
       duty_cycle_data: [],
@@ -241,23 +284,22 @@ function App() {
   const handleSubmissiton = () => {
     setLoading(true);
 
-    console.log(finalResquest.duty_cycle_data)
+    console.log(finalResquest)
 
     axios
       .post('http://127.0.0.1:8000/api/calculate/', finalResquest)
       .then(response => {
-
-        console.log(`fuel consumtion: ${response.data.fuel_consumption}`)
-        console.log(`all res : ${JSON.stringify(response.data)}`)
+        console.log(`fuel consumtion: ${response.data.fuel_consumption.diesel2}`)
+        console.log(`co2 emisstion : ${response.data.emission}`)
+        console.log(`hydrogen usage : ${response.data.fuel_consumption.hydrogen1}`)
         if (response.data.estimated_route) {
-          setReturnedRes(prev => ({ ...prev, generated_route_data: response.data.estimated_route }))
+          setReturnedRes(prev => ({ ...prev, generated_route_data: response.data.estimated_route}))
         }
-
-        setReturnedRes(prev => ({ ...prev, duty_cycle_data: response.data.duty_cycle }))
+        setReturnedRes(prev => ({ ...prev, duty_cycle_data: response.data.duty_cycle}))
         setReturnedRes(prev => ({ ...prev, speed_power_curve: response.data.speed_power_curve }))
         setReturnedRes(prev => ({ ...prev, fuel_consumption: response.data.fuel_consumption }))
-        setReturnedRes(prev => ({ ...prev, co2_emission: response.data.co2_emission }))
-        setReturnedRes(prev => ({ ...prev, h2_comsumpution: response.data.hydrogen_consumption}))
+        setReturnedRes(prev => ({ ...prev, co2_emission: response.data.emission }))
+        
       })
       .catch(error => {
         console.error('Error uploading request:', error);
@@ -273,16 +315,17 @@ function App() {
       .post('http://127.0.0.1:8000/api/calculate/', DEV_REQST)
       .then(response => {
 
-        console.log(`fuel consumtion: ${response.data.fuel_consumption}`)
-        console.log(`co2 emisstion : ${response.data.co2_emission}`)
+        console.log(`fuel consumtion: ${response.data.fuel_consumption.diesel2}`)
+        console.log(`co2 emisstion : ${response.data.emission}`)
+        console.log(`hydrogen usage : ${response.data.fuel_consumption.hydrogen1}`)
         if (response.data.estimated_route) {
-          setReturnedRes(prev => ({ ...prev, generated_route_data: response.data.estimated_route }))
+          setReturnedRes(prev => ({ ...prev, generated_route_data: response.data.estimated_route}))
         }
-        setReturnedRes(prev => ({ ...prev, duty_cycle_data: response.data.duty_cycle }))
+        setReturnedRes(prev => ({ ...prev, duty_cycle_data: response.data.duty_cycle}))
         setReturnedRes(prev => ({ ...prev, speed_power_curve: response.data.speed_power_curve }))
         setReturnedRes(prev => ({ ...prev, fuel_consumption: response.data.fuel_consumption }))
-        setReturnedRes(prev => ({ ...prev, co2_emission: response.data.co2_emission }))
-        setReturnedRes(prev => ({ ...prev, h2_comsumpution: response.data.hydrogen_consumption}))
+        setReturnedRes(prev => ({ ...prev, co2_emission: response.data.emission }))
+        
 
       })
       .catch(error => {

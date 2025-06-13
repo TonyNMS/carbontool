@@ -12,11 +12,10 @@ export default function MetricDisplay({
   label,
   value,
   unit = "",
-  formatter = (v) => v.toLocaleString(),
 }) {
   return (
     <div className="metric-display">
-      <div className="metric-value">{formatter(value)}{unit && ` ${unit}`}</div>
+      <div className="metric-value">{value.toFixed(2)}{unit && ` ${unit}`}</div>
       <div className="metric-label">{label}</div>
     </div>
   );

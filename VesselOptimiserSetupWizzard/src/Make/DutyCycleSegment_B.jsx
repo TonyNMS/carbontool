@@ -2,9 +2,9 @@ import React, { useState } from "react";
 
 const ALL_FUEL =[
     {fuelName:"Select a fuel", fuelData: "diesel1"},
-    {fuelName:"Diesel", fuelData: "diesel1"},
-    {fuelName:"Marine Diesel", fuelData: "diesel2"},
-    {fuelName:"Bio Diesel", fuelData: "diesel3"},
+    {fuelName:"Marine Diesel", fuelData: "diesel1"},
+    {fuelName:"Bio Diesel", fuelData: "diesel2"},
+    {fuelName:"Marine Gas Oil", fuelData: "diesel3"},
     {fuelName:"Hydrogen", fuelData:"hydrogen1"},
     {fuelName:"Methonal",fuelData:"methanol1"},
     {fuelName:"Heavy Fuel Oil", fuelData: "diesel4"}
